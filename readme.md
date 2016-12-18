@@ -13,8 +13,13 @@ Built on MERN stack
 
 TO DO:
 Registration page for organizations <-- I'm working on this one
+
 Refactor Ticket Submission page
+
 Refactor Login method
+
 Refactor/cleanup dashboard
+
 Add charts/reports to dashboard
+
 Gamify dashboard
