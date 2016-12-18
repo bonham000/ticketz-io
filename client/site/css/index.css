@@ -30,9 +30,10 @@ input {
 .btn {
     padding: 5px 8px;
     border-radius: 5px;
+    background-color: white;
     border: 1px solid rgba(0,100,200,.1);
     cursor: pointer;
-    transition: .2s;
+    transition: background-color .2s;
 }
 .btn:hover {
     background-color: #cfe;
@@ -63,7 +64,7 @@ input {
 
 /*login page */
 #login-container {
-    width: 300px;
+    width: 250px;
     margin: 20px auto;
     text-align: center;
 }
