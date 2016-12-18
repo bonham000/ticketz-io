@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ticketz.io</title>
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+</head>
+<body>
+
+<div id="navbar">
+    <a href="/"><div class="btn" id="home-btn"><i class="fa fa-home"></i></div></a>
+    <a href="/signup"><div class="btn" id="signup-btn">Sign Up</div></a>
+    <a href="/login"><div class="btn" id="login-btn">Login</div></a>
+</div>
+
+    <div class="container">
+        <div id="login-container">
+            <form action="/api/login" method="post">
+                <input type="text" name="username" class="form-control" placeholder="username">
+                <input type="password" name="password" class="form-control" placeholder="password">
+                <input class="btn btn-success form-submit" type="submit" value="Log in" id="authenticate-btn">
+            </form>
+
+            <br>
+
+            <p style={{"text-align": "center"}}>
+            <b>DEMO login</b><br>
+            username: admin<br>
+            password: admin
+            </p>
+
+        </div>
+    </div>
+
+</body>
+
+<footer>
+    <script src="js/login.js";
+</footer>
+
+</html>

@@ -222,14 +222,21 @@ app.delete('/api/deleteadmin', function(req, res){
 
 
 
-
+//Serve the pages
+//The plain old HTML/CSS/Javascript pages (home, signup, login, and submit ticket)
 app.use(express.static(path.join(__dirname, '/client/site')));
 app.get('/', function(req, res){
-	res.sendFile(path.join(__dirname, '/client/dashboard/build/index.html'))
+	res.sendFile(path.join(__dirname, '/client/site/index.html'))
 });
-
+app.get('/signup', function(req, res){
+	res.sendFile(path.join(__dirname, '/client/site/signup.html'))
+});
+app.get('/login', function(req, res){
+    res.sendFile(path.join(__dirname, '/client/site/login.html'))
+})
+//Serve the webpack bundle --
+//The fancy react/react-router dashboard!
 app.use(express.static(path.join(__dirname, '/client/dashboard/build')));
-//Serve the bundle
 app.get('*', function(req, res){
     res.sendFile(path.join(__dirname, '/client/dashboard/build/index.html'));
 });
