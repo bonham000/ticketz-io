@@ -1,0 +1,82 @@
+@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css');
+@import url('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css');
+@import url('https://fonts.googleapis.com/css?family=Lato');
+/*
+Color Palette
+success-green: #5cb85c
+light-light-green: #D5FdC8;
+soft-green: #dffcd0
+soft-yellow: #fcffcc
+*/
+a, a:hover, a:active, a:visited, a:focus{
+    color: inherit;
+    text-decoration: inherit;
+}
+#logo {
+    width: 90%;
+    margin: 5% auto -20px auto;
+}
+#card {
+    margin-top: 55px;
+    margin-bottom: 30px;
+    background-color: white;
+    opacity: .95;
+    border-radius: 10px;
+}
+#navbar {
+    width: auto; height: 30px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    margin-top: -30px;
+    color: #030;
+    float: right;
+}
+#card-content {
+    padding: 20px 15% 60px 15%;
+}
+.heading {
+    margin: 10px auto 25px auto;
+    width: 90%;
+    color: #096D00;
+    text-align: center;
+}
+#auth-btn {
+    float: right;
+    width: auto; height: 40px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    background-color: white;
+}
+#auth-btn:hover, #home-btn:hover {
+    transform: translateY(-5px);
+}
+#home-btn {
+    float: left;
+    width: auto; height: 40px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: white;
+}
+.btn {
+    transition: .2s;
+    border: none;
+    border-radius: 0;
+}
+.btn-danger {
+    background-color: #F33;
+}
+.error-flash {
+    text-align: center;
+    font-weight: bold;
+}
+.row {
+    margin: 0 auto;
+}
+
+
+
+@media only screen and (min-width: 768px) {
+    #card {
+        box-shadow: 0 1px 2px rgba(0,0,0,.24), 0 1px 4px rgba(0,0,0,.12);
+    }
+}

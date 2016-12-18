@@ -1,0 +1,71 @@
+.ticket-container:nth-child(even) {
+    background-color: #b6e5db;
+}
+
+.sub-container {
+    padding: 15px;
+    overflow: hidden;
+}
+
+.assignee {
+    border: 1px solid #95ed78;
+    opacity: .6;
+}
+textarea {
+    width: 100%;
+    resize: none;
+    border: 1px solid #C5FdB8;
+    opacity: .6;
+}
+.route-btn {
+    background-color: tomato;
+}
+.complete-btn {
+    background-color: #096D00;
+}
+.tk-btn {
+    color: white;
+    border-radius: 5px;
+    width: 60px;
+    text-align: center;
+    margin: 5px auto;
+    opacity: .7;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Chrome/Safari/Opera */
+    -khtml-user-select: none; /* Konqueror */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version */
+    cursor: pointer;
+}
+.tk-btn:hover {
+    opacity: .85;
+}
+.tk-btn:active {
+    opacity: 1;
+}
+
+
+@media only screen and (min-width: 768px) {
+
+    .ticket-container {
+        display: flex;
+        font-size: 12px;
+        margin: 0 auto;
+    }
+
+    .c1 {width: 20%;}
+    .c2 {width: 45%;}
+    .c3 {
+        width: 20%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .c4 {
+        width: 15%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+}

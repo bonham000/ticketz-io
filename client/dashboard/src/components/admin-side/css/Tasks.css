@@ -1,0 +1,8 @@
+#task-box {
+    margin: 10px auto;
+    height: 120px;
+}
+#save-task-btn {
+    display: block;
+    margin: 0 auto;
+}

@@ -1,0 +1,97 @@
+/*
+Mobile First!
+*/
+#profile-box {
+    position: fixed;
+    background-color: #fa7252;
+    height: 60px; width: 100%;
+    display: flex;
+    line-height: 60px;
+    z-index: 10;
+}
+#profile-box-name {
+    color: white;
+    width: 70%;
+    font-size: 24px;
+    text-align: left;
+    padding-left: 20px;
+}
+.prof-box-btn {
+    width: 10%;
+    background-color: #fa7252;
+    color: #de5939;
+    font-size: 24px;
+    text-align: center;
+    cursor: pointer;
+}
+.settings-btn {
+    color: #de5939;
+}
+.prof-box-btn:hover, .settings-btn:hover {
+    color: white;
+}
+
+
+
+#admin-navbar {
+    position: fixed;
+    top: 60px;
+    background-color: #273135;
+    color: #fa7252;
+    width: 200px; height: 100%;
+    z-index: 10;
+    left: -200px;
+    transition: .3s;
+}
+.navbtn {
+    padding: 20px;
+    font-size: 18px;
+    font-weight: bold;
+}
+.navbtn:hover {
+    background-color: #171d20;
+}
+
+
+
+#admin-content {
+    position: absolute;
+    top: 60px;
+    width: 100%;
+    padding: 10px;
+    background-color: #e9f0f5;
+    min-height: 100vh;
+}
+.card {
+    padding: 10px;
+    background-color: white;
+    width: 100%;
+    border-radius: 5px;
+    text-align: center;
+    margin: 0 10px 10px 0;
+}
+.small-card {
+    padding: 10px;
+    background-color: white;
+    width: 300px;
+    border-radius: 5px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+
+
+@media only screen and (min-width: 768px) {
+    #admin-content {
+        padding-left: 210px;
+    }
+    #admin-navbar {
+        left: 0;
+    }
+    #menu-btn-box {
+        display: none;
+    }
+    #profile-box-name {
+        width: 80%;
+    }
+}

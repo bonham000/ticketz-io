@@ -1,0 +1,19 @@
+#edit-user-btn {
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: #273135;
+}
+#create-user-btn {
+    background-color: #fa7252;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+}
+#submit-create-account, #submit-edit-account, #submit-delete-account {
+    display: block;
+    margin: 20px auto;
+}
+#user-btn-container {
+    display: flex;
+}
+#user-form-container input, #user-form-container select {
+}

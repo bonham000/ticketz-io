@@ -1,0 +1,39 @@
+#top-select-bar {
+    margin: 30px auto;
+    display: flex;
+    justify-content: center;
+}
+.tk-topbtn {
+    width: 60px;
+    height: 16px;
+    line-height: 16px;
+    font-size: 12px;
+    background-color: #273135;
+    color: white;
+    text-align: center;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Chrome/Safari/Opera */
+    -khtml-user-select: none; /* Konqueror */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version */
+}
+.tk-topbtn:hover {
+    cursor: pointer;
+}
+#active-tickets-btn {
+    background-color: #fa7252;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+}
+#advanced-search-btn {
+    width: 80px;
+}
+#archive-tickets-btn {
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+}
+#search-container {
+    width: 400px;
+    margin: 0 auto;
+}
