@@ -62,32 +62,46 @@ input {
 .btn {
     padding: 5px 8px;
     border-radius: 5px;
-    background-color: white;
-    border: 2px solid #273135;
+    background-color: #6dcab7;
     cursor: pointer;
     transition: background-color .2s;
     display: block;
     margin: 0 auto;
+    color: white;
 }
 .btn:hover {
-    background-color: #cfe;
+    background-color: #7cd5ba;
+    color: white;
 }
 #home-btn {
     position: absolute;
-    left: 10px; top: 8px;
+    left: 10px; top: 10px;
 }
 #login-btn {
     position: absolute;
-    right: 10px; top: 8px;
+    right: 10px; top: 10px;
 }
 
 #signup-btn {
     position: absolute;
-    color: white;
     background-color: #de5939;
-    border: none;
     right: 70px; top: 10px;
 }
 #signup-btn:hover {
     background-color: #fa7252;
+}
+
+
+
+
+
+
+
+
+.home-big-text {
+    font-size: 98px;
+    text-align: center;
+}
+.text-center {
+    text-align: center;
 }
