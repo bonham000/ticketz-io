@@ -11,6 +11,6 @@ coverage
 
 # misc
 .DS_Store
-env.js
+.env
 npm-debug.log
 .idea
