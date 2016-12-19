@@ -1,3 +1,9 @@
+//Require process.env variables
+//uses the "dotenv" npm package
+//create local variables by making a .env file in root directory here, then
+//add them in KEY=VALUE format i.e.  -----  MONGO_URL=mongodb://mydb
+require('dotenv').config({silent: true});
+
 //Core Modules
 var path = require('path');
 var moment = require('moment');
@@ -16,9 +22,8 @@ var express = require('express');
 var app = express();
 
 //Database Modules, and establishing connection
-require('./env');
 var mongoose = require('mongoose');
-mongoose.connect(process.env.mongoURL);
+mongoose.connect(process.env.MONGO_URL);
 var User = require('./models/user.js');
 var Ticket = require('./models/ticket.js');
 var Organization = require('./models/organization.js');
