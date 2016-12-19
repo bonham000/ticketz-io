@@ -99,9 +99,18 @@ input {
 
 
 .home-big-text {
-    font-size: 98px;
+    font-size: 8vw;
     text-align: center;
 }
-.text-center {
+.home-medium-text {
+    font-size: 5vw;
     text-align: center;
+}
+@media only screen and (min-width: 1200px) {
+    .home-big-text {
+        font-size: 6vw;
+    }
+    .home-medium-text {
+        font-size: 3vw;
+    }
 }
