@@ -17,7 +17,7 @@ import Tickets from './components/admin-side/pages/Tickets';
 import EditUsers from './components/admin-side/pages/EditUsers';
 import Settings from './components/admin-side/pages/Settings';
 import Tasks from './components/admin-side/pages/Tasks';
-
+import PageNotFound from './components/admin-side/pages/PageNotFound';
 
 
 
@@ -25,18 +25,13 @@ class Index extends Component {
 	render() {
 		return (
 			<Router history={browserHistory}>
-				<Route path="/app" component={App}>
-					<IndexRoute component={NewTicket}/>
-					<Route path="status" component={Status}/>
-					<Route path="login" component={Login}/>
-					<Route path="success" component={Success} />
-				</Route>
 				<Route path="/admin" component={AppAdmin}>
 					<IndexRoute component={Dashboard} />
 					<Route path="tickets" component={Tickets} />
 					<Route path="editusers" component={EditUsers} />
 					<Route path="settings" component={Settings} />
 					<Route path="tasks" component={Tasks} />
+					<Route path="*" component={PageNotFound} />
 				</Route>
 			</Router>
 		)
