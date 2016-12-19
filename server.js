@@ -68,9 +68,9 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
-app.post('/api/login', passport.authenticate('local', {failureRedirect: '/app/login'}),
+app.post('/api/login', passport.authenticate('local', {failureRedirect: '/login'}),
     function(req, res){
-			  res.redirect('/admin');
+			  res.redirect('/dashboard');
     }
 );
 app.get('/api/logout', function(req, res){

@@ -18,7 +18,7 @@ class Index extends Component {
 	render() {
 		return (
 			<Router history={browserHistory}>
-				<Route path="/admin" component={AppAdmin}>
+				<Route path="/dashboard" component={AppAdmin}>
 					<IndexRoute component={Dashboard} />
 					<Route path="tickets" component={Tickets} />
 					<Route path="editusers" component={EditUsers} />

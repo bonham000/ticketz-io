@@ -64,16 +64,16 @@ class AppAdmin extends Component {
 							<div id="profile-box">
 								<div id="menu-btn-box" className="prof-box-btn" onClick={this.animateNavbar}><i className="fa fa-bars" /></div>
 								<div id="profile-box-name"><Link to="/admin">{this.state.username}</Link></div>
-								<div className="prof-box-btn"><Link to="/admin/settings"><i className="fa fa-cogs" /></Link></div>
+								<div className="prof-box-btn"><Link to="/dashboard/settings"><i className="fa fa-cogs" /></Link></div>
 								<div className="prof-box-btn" onClick={()=>this.handleLogout()}><i className="fa fa-lock" /></div>
 							</div>
 							
 							
                 <div id="admin-navbar">
-									<Link to="/admin"><div className="navbtn">Dashboard</div></Link>
-									<Link to="/admin/tickets"><div className="navbtn">Tickets</div></Link>
-									<Link to="/admin/editusers"><div className="navbtn">Users</div></Link>
-									<Link to="/admin/tasks"><div className="navbtn">Tasks</div></Link>
+									<Link to="/dashboard"><div className="navbtn">Dashboard</div></Link>
+									<Link to="/dashboard/tickets"><div className="navbtn">Tickets</div></Link>
+									<Link to="/dashboard/editusers"><div className="navbtn">Users</div></Link>
+									<Link to="/dashboard/tasks"><div className="navbtn">Tasks</div></Link>
                 </div>
 							
                     <div id="admin-content">

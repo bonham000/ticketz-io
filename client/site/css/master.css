@@ -5,6 +5,7 @@
 body {
     margin: 0;
     font-family: 'Lato', sans-serif;
+    background-color: mintcream;
 }
 a {
     color: inherit;
@@ -21,19 +22,19 @@ input {
 .input {
     width: 90%;
     border-radius: 20px;
-    border: 2px solid #273135;
-    padding: 8px;
+    border: 1px solid #273135;
+    padding: 4px;
     outline: none;
     font-size: 16px;
     text-align: center;
 }
 .input:hover {
-    transition: .3s;
-    border: 2px solid #6dcab7;
+    transition: .2s;
+    border: 1px solid #6dcab7;
 }
 .input:focus {
-    transition: .3s;
-    border: 2px solid #6dcab7;
+    transition: .2;
+    border: 1px solid #6dcab7;
 }
 
 
@@ -108,14 +109,11 @@ input {
     text-align: center;
 }
 .home-medium-text {
-    font-size: 5vw;
+    font-size: 4vw;
     text-align: center;
 }
 @media only screen and (min-width: 1200px) {
     .home-big-text {
         font-size: 6vw;
-    }
-    .home-medium-text {
-        font-size: 3vw;
     }
 }
