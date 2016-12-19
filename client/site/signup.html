@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Ticketz.io</title>
-    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link rel="stylesheet" type="text/css" href="css/master.css">
+    <link rel="stylesheet" type="text/css" href="css/signup.css">
 </head>
 <body>
 
@@ -14,19 +15,24 @@
     <a href="/login"><div class="btn" id="login-btn">Login</div></a>
 </div>
 
-will need the following items:<br>
-
-Organization info:<br>
-Name of Organization, Account ownder's email, Password<br><br>
-
-
-User info:<br>
-Name, Email, Role, Password
 
 <div class="container">
-    <h3>Signup!</h3>
-</div>
+<!--This form will be validated in javascript, not here in the html!-->
+	<div class="form-container">
+		<form method="post" action="/api/signup">
+			<h3>Sign up</h3>
+			<input type="text" name="orgName" class="input" placeholder="Name of organization">
+			<input type="text" name="ownerName" class="input" placeholder="Account owner's name">
+			<input type="text" name="ownerEmail" class="input" placeholder="Account owner's email">
+			<input type="password" name="ownerPassword" class="input" placeholder="Password">
+			<h6>Please use at least 6 characters</h6><br>
 
+			<input type="text" name="orgPassword" class="input" placeholder="Organization password">
+			<h6>For security, this password will be required every time someone attempts to submit a ticket</h6>
+			<button class="btn" type="submit" id="authenticate-btn">Submit</button>
+		</form>
+	</div>
+</div>
 
 </body>
 
