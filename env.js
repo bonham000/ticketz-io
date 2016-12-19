@@ -1,0 +1,1 @@
+process.env.mongoURL = 'mongodb://helpnetadmin:helpnetadmin@ds023475.mlab.com:23475/helpnet';

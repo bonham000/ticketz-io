@@ -1,0 +1,24 @@
+{
+  "name": "ticketz-io",
+  "version": "0.0.1",
+  "description": "pre-alpha ticket management system",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "Ethan Rose",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.3.0",
+    "body-parser": "^1.15.2",
+    "connect-flash": "^0.1.1",
+    "connect-mongo": "^1.3.2",
+    "express": "^4.14.0",
+    "express-session": "^1.14.2",
+    "moment": "^2.17.0",
+    "mongodb": "^2.2.12",
+    "mongoose": "^4.7.0",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0"
+  }
+}
