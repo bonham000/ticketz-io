@@ -6,7 +6,8 @@ var userSchema = new Schema({
     username: {type: String, required: true, unique: true},
     password: {type: String, required: true},
     role: String, //technician OR manager OR owner
-	task: String
+	task: String,
+    dpt: String
 });
 userSchema.pre('update', function(next){
     if (this.getUpdate().$set.password) {

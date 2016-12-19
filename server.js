@@ -6,7 +6,6 @@ require('dotenv').config({silent: true});
 
 //Core Modules
 var path = require('path');
-var moment = require('moment');
 var bodyParser = require('body-parser');
 
 //Authentication Modules
@@ -29,15 +28,6 @@ mongoose.connect(process.env.MONGO_URL);
 var User = require('./models/user.js');
 var Ticket = require('./models/ticket.js');
 var Organization = require('./models/organization.js');
-var _idcount = 0;
-mongoose.connection.on('connected', function () {
-    Ticket.find({}, {_id: 1}).sort([['_id', 'descending']])
-        .exec(function(err, tickets){
-            if (err) throw err;
-            _idcount = tickets.length ? tickets[0]._id + 1 : 0;
-        })
-});
-
 
 
 
@@ -78,6 +68,17 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
+app.post('/api/login', passport.authenticate('local', {failureRedirect: '/app/login'}),
+    function(req, res){
+			  res.redirect('/admin');
+    }
+);
+
+app.get('/api/logout', function(req, res){
+	req.logout();
+	res.send(true);
+});
+
 
 
 

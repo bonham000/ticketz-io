@@ -1,12 +1,17 @@
+var path = require('path');
+var moment = require('moment');
+
 var express = require("express");
 var router = express.Router();
 
 //Database Modules, and establishing connection
 var mongoose = require('mongoose');
-mongoose.connect(process.env.MONGO_URL);
 var User = require('./models/user.js');
 var Ticket = require('./models/ticket.js');
 var Organization = require('./models/organization.js');
+
+//this _idcount variable makes sure that when a new ticket is submitted,
+//its _id will always be one more than the last ticket submitted
 var _idcount = 0;
 mongoose.connection.on('connected', function () {
     Ticket.find({}, {_id: 1}).sort([['_id', 'descending']])
@@ -15,19 +20,6 @@ mongoose.connection.on('connected', function () {
             _idcount = tickets.length ? tickets[0]._id + 1 : 0;
         })
 });
-
-app.post('/api/login', passport.authenticate('local', {failureRedirect: '/app/login'}),
-    function(req, res){
-			  res.redirect('/admin');
-    }
-);
-
-router.get('/api/logout', function(req, res){
-	req.logout();
-	res.send(true);
-});
-
-
 
 
 
@@ -65,7 +57,7 @@ router.post('/api/createadmin', function(req, res){
 		})
 });
 //CREATE: sign up form --> creates a new organization in DB
-app.post('/api/signup', function(req, res){
+router.post('/api/signup', function(req, res){
 	console.log('req sent!')
 	console.log(req.body)
 	res.send('awesome!')
