@@ -168,19 +168,6 @@ router.delete('/api/deleteadmin', function(req, res){
 
 
 
-//Serve the pages
-//The plain old HTML/CSS/Javascript pages (home, signup, login, and submit ticket)
-router.use(express.static(path.join(__dirname, '/client/site')));
-router.get('/', function(req, res){
-	res.sendFile(path.join(__dirname, '/client/site/index.html'))
-});
-router.get('/signup', function(req, res){
-	res.sendFile(path.join(__dirname, '/client/site/signup.html'))
-});
-router.get('/login', function(req, res){
-	if (req.user) res.redirect('/dashboard')
-	else res.sendFile(path.join(__dirname, '/client/site/login.html'))
-})
 //Serve the webpack bundle --
 //The fancy react/react-router dashboard!
 router.use(express.static(path.join(__dirname, '/client/dashboard/build')));
