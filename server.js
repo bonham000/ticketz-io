@@ -73,7 +73,6 @@ app.post('/api/login', passport.authenticate('local', {failureRedirect: '/app/lo
 			  res.redirect('/admin');
     }
 );
-
 app.get('/api/logout', function(req, res){
 	req.logout();
 	res.send(true);

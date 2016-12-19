@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
+import './css/App.css'; //need to clean this stylesheet!!!!
 import './css/AppAdmin.css';
 import $ from 'jquery';
 

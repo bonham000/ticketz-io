@@ -3,13 +3,6 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 
-//user-side components
-import App from './components/user-side/App';
-import NewTicket from './components/user-side/NewTicket';
-import Status from './components/user-side/Status';
-import Login from './components/user-side/Login';
-import Success from './components/user-side/Success';
-
 //admin-side components
 import AppAdmin from './components/admin-side/AppAdmin';
 import Dashboard from './components/admin-side/pages/Dashboard';
