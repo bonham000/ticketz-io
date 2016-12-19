@@ -64,6 +64,13 @@ router.post('/api/createadmin', function(req, res){
 			}
 		})
 });
+//CREATE: sign up form --> creates a new organization in DB
+app.post('/api/signup', function(req, res){
+	console.log('req sent!')
+	console.log(req.body)
+	res.send('awesome!')
+});
+
 
 
 
