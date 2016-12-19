@@ -15,7 +15,7 @@ textarea {
     width: 100%;
     resize: none;
     border: 1px solid #C5FdB8;
-    opacity: .6;
+    /*opacity: .6;*/
 }
 .route-btn {
     background-color: tomato;
