@@ -79,7 +79,11 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
+
+
 app.use("/",routes);
+
+
 
 //Listen
 var port = process.env.PORT || 3001;

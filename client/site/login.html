@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Ticketz.io</title>
-    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link rel="stylesheet" type="text/css" href="css/master.css">
 </head>
 <body>
 
@@ -15,13 +15,13 @@
 </div>
 
     <div class="container">
-        <div id="login-container">
+        <div class="form-container">
 
             <h3>Login</h3>
             <form action="/api/login" method="post">
-                <input type="text" name="username" class="form-control" placeholder="username">
-                <input type="password" name="password" class="form-control" placeholder="password">
-                <input class="btn form-submit" type="submit" value="Log in" id="authenticate-btn">
+                <input type="text" name="username" class="input" placeholder="username">
+                <input type="password" name="password" class="input" placeholder="password">
+                <button class="btn" type="submit">Log in</button>
             </form>
 
             <br>
