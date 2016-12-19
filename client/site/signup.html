@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Ticketz.io</title>
     <link rel="stylesheet" type="text/css" href="css/master.css">
-    <link rel="stylesheet" type="text/css" href="css/signup.css">
 </head>
 <body>
 
@@ -21,22 +20,22 @@
 	<div class="form-container">
 		<form method="post" action="/api/signup" id="signup-form">
 			<h3>Sign up</h3>
-			<input type="text" name="orgName" class="input" placeholder="Name of organization">
-			<input type="text" name="ownerName" class="input" placeholder="Account owner's name">
-			<input type="text" name="ownerEmail" class="input" placeholder="Account owner's email">
-			<input type="password" name="ownerPassword" class="input" placeholder="Password">
+			<input type="text" id="ownerName" class="input" placeholder="Account owner's name">
+			<input type="text" id="ownerEmail" class="input" placeholder="Account owner's email">
+			<input type="password" id="ownerPassword" class="input" placeholder="Password">
 			<h6>Please use at least 6 characters</h6><br>
+			<input type="password" id="confirmrPassword" class="input" placeholder="Confirm password">
 
-			<input type="text" name="orgPassword" class="input" placeholder="Organization password">
+
+			<input type="text" id="orgName" class="input" placeholder="Name of organization">
+			<h5>Your organization's unique URL will be:</h5>
+			<div id="orgUrl">http://ticketz.io/</div><br>
+			<input type="text" id="orgPassword" class="input" placeholder="Organization password">
 			<h6>For security, this password will be required every time someone attempts to submit a ticket</h6>
 			<button class="btn" type="submit" id="authenticate-btn">Submit</button>
 		</form>
 	</div>
 </div>
-
-
-
-
 
 
     <!-- footer bar-->
@@ -50,7 +49,13 @@
 </body>
 
 <footer>
-    <script src="js/signup.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script>
+    $('#orgName').change(function(e){
+    	console.log('changed')
+	    $('#orgUrl').html('http://ticketz.io/' + $('#orgName').val())
+    })
+    </script>
 </footer>
 
 </html>
