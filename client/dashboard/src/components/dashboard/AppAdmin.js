@@ -70,7 +70,7 @@ class AppAdmin extends Component {
   }
 	animateNavbar(){
 		let elem = document.getElementById('admin-navbar');
-		(elem.style.left == '-200px') ? elem.style.left = '0' : elem.style.left = '-200px';
+		(elem.style.left === '-200px') ? elem.style.left = '0' : elem.style.left = '-200px';
 	}
   render(){
     return (
@@ -78,7 +78,7 @@ class AppAdmin extends Component {
 				
 				<div id="profile-box">
 					<div id="menu-btn-box" className="prof-box-btn" onClick={this.animateNavbar}><i className="fa fa-bars" /></div>
-					<div id="profile-box-name"><Link to="/admin">{this.state.username}</Link></div>
+					<div id="profile-box-name"><Link to="/dashboard">{this.state.username}</Link></div>
 					<div className="prof-box-btn"><Link to="/dashboard/settings"><i className="fa fa-cogs" /></Link></div>
 					<div className="prof-box-btn" onClick={()=>this.handleLogout()}><i className="fa fa-lock" /></div>
 				</div>

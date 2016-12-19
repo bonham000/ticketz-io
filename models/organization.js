@@ -2,11 +2,9 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var organizationSchema = new Schema({
-	name: {type: String, required: true},
+	orgName: {type: String, required: true},
     ownerEmail: {type: String, required: true, unique: true},
-    logo: String,
-	plan: String,
-	
+	submittalPassword: String
 });
 
 var Organization = mongoose.model('Organization', organizationSchema);

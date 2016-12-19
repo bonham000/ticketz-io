@@ -2,11 +2,6 @@
 @import url('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css');
 @import url('https://fonts.googleapis.com/css?family=Lato');
 
-body {
-    margin: 0;
-    font-family: 'Lato', sans-serif;
-    background-color: mintcream;
-}
 a {
     color: inherit;
     text-decoration: inherit;
@@ -19,20 +14,21 @@ input {
 
 
 /*inputs / forms */
-.input {
+.hm-input {
     width: 90%;
-    border-radius: 20px;
+    border-radius: 10px;
+    margin: 10px auto;
     border: 1px solid #273135;
     padding: 4px;
     outline: none;
     font-size: 16px;
     text-align: center;
 }
-.input:hover {
+.hm-input:hover {
     transition: .2s;
     border: 1px solid #6dcab7;
 }
-.input:focus {
+.hm-input:focus {
     transition: .2;
     border: 1px solid #6dcab7;
 }
@@ -40,16 +36,17 @@ input {
 
 
 /*Containers*/
-#navbar {
+#hm-navbar {
     position: fixed;
     background-color: white;
     width: 100%; height: 50px;
     border-bottom: 1px solid rgba(0,0,0,.2);
 }
-.container {
-    padding-top: 60px;
-    width: 90%; height: 100vh;
+.hm-container {
+    padding: 60px 7%;
+    width: 100%; height: 100vh;
     margin: 0 auto;
+    background-color: mintcream;
 }
 .form-container {
     width: 250px;
@@ -73,7 +70,7 @@ input {
 
 
 /*Button Styling*/
-.btn {
+.hm-btn {
     padding: 5px 8px;
     border-radius: 5px;
     background-color: #6dcab7;
@@ -82,12 +79,13 @@ input {
     display: block;
     margin: 0 auto;
     color: white;
+    border: none;
 }
-.btn:hover {
+.hm-btn:hover {
     background-color: #7cd5ba;
     color: white;
 }
-#home-btn {
+#hm-home-btn {
     position: absolute;
     left: 10px; top: 10px;
 }
@@ -113,6 +111,10 @@ input {
 
 
 
+.error-flash {
+    text-align: center;
+    font-weight: bold;
+}
 .home-big-text {
     font-size: 8vw;
     text-align: center;
