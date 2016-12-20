@@ -22,8 +22,41 @@ mongoose.connection.on('connected', function () {
 });
 
 
-
 //CRUD APIs
+//CREATE: Create new organization
+router.get('/api/checkdomain/:domain', function(req, res){
+	Organization.find({domain: req.params.domain}, function(err, orgs){
+		if (err) throw err;
+		if (orgs.length === 0) { res.status(200).send() }
+		else { res.status(500).send() }
+	})
+})
+router.post('/api/createorg', function(req, res){
+
+	var orgdata = req.body
+	orgdata.date = moment().format('MMMM DD YYYY, h:mm a');
+	var neworg = new Organization(orgdata)
+	neworg.save(function(err){
+		if (err) throw err;
+		console.log(req.body.domain + ' is registering an account...')
+
+		var userdata = {}
+		userdata.name = req.body.ownerName
+		userdata.username = req.body.ownerEmail
+		userdata.password = req.body.ownerPassword
+		userdata.domain = req.body.domain
+		userdata.role = 'owner'
+		console.log(userdata)
+		var newuser = new User(userdata)
+		newuser.save(function(err){
+			if (err) throw err;
+			console.log('successful!')
+			res.end()
+		})
+	})
+
+
+})
 //CREATE: New ticket is submitted
 router.post('/api/newticket', function(req, res){
 	var data = req.body;
