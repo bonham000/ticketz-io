@@ -98,7 +98,7 @@ class EditUsers extends Component {
     	//if the edit tab is selected show this html
 			var edit = (
 				<div className="small-card">
-					<h4>Edit Existing User</h4>
+					<h4 className='editUserTitle'>Edit Existing User</h4>
 					<h5>Username</h5>
 					<select id="username" className="form-control">
 						<option value="" style={{display: "none"}}></option>
@@ -131,7 +131,7 @@ class EditUsers extends Component {
 			//if the create tab is selected show this html
 			var create = (
 				<div className="small-card">
-					<h4>Create New User</h4>
+					<h4 className='editUserTitle'>Create New User</h4>
 					<h5>Username</h5>
 					<input type="text" id="username" className="form-control" />
 					<h5>Password</h5>
