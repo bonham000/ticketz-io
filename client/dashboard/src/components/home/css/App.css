@@ -16,7 +16,7 @@ input {
 /*inputs / forms */
 .hm-input {
     width: 90%;
-    border-radius: 20px;
+    border-radius: 5px;
     margin: 10px auto;
     border: 1px solid #273135;
     padding: 4px;

@@ -112,7 +112,7 @@ class Signup extends Component {
 		return (
 	<div className="form-container">
 		<form method="post" action="/api/signup" id="signup-form" onSubmit={(e)=>this.handleSubmit(e)}>
-			<h3>Sign up</h3>
+			<h3>Make work easier now.</h3>
 			<input type="text" id="ownerName" className="hm-input" placeholder="Account owner's name" />
 			<input type="text" id="ownerEmail" className="hm-input" placeholder="Account owner's email" onBlur={(e)=>this.checkDomain(e)}/>
 			<h6 id="org-email-flash">Must be a unique domain</h6><br />
