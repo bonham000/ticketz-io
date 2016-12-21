@@ -4,7 +4,7 @@
   "description": "pre-alpha ticket management system",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "babel-watch server.js"
   },
   "author": "Ethan Rose",
   "license": "ISC",
@@ -21,5 +21,8 @@
     "mongoose": "^4.7.0",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0"
+  },
+  "devDependencies": {
+    "babel-watch": "^2.0.4"
   }
 }
