@@ -70,8 +70,8 @@ router.get('/api/organizations', function(req, res) {
 
 //CREATE: New ticket is submitted
 router.post('/api/new-ticket', function(req, res){
-	let ticket = req.body;
-	let password = ticket.password;
+	var ticket = req.body;
+	var password = ticket.password;
 	console.log(password);
 	// verify organization password here
 	// successful, submit new ticket and send status 200 to client
