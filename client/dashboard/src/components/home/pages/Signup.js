@@ -21,14 +21,14 @@ class Signup extends Component {
 		$('#org-email-flash').html('<i class="fa fa-circle-o-notch fa-spin"></i>').css('color', 'black')
 		$.ajax({
 			method: 'get',
-			url: '/api/checkdomain/' + domain,
+			url: '/api/checkdomain/' + e.target.value,
 			success: (res)=>{
 				this.setState({valid: true, domain: domain})
-				$('#org-email-flash').html('<i class="fa fa-check" /> Domain is available!').css('color', 'green')
+				$('#org-email-flash').html('<i class="fa fa-check" /> Email is available!').css('color', 'green')
 			},
 			error: (res)=>{
 				this.setState({valid: false})
-				$('#org-email-flash').html('<i class="fa fa-times" /> Domain already exists.').css('color', 'red')
+				$('#org-email-flash').html('<i class="fa fa-times" /> Email is taken.').css('color', 'red')
 			}
 			})
 		}
@@ -43,7 +43,7 @@ class Signup extends Component {
 		let data = {}
 		function valOf(id) {return document.getElementById(id).value}
 		const fields = ['ownerName', 'ownerEmail', 'ownerPassword', 'confirmPassword', 'orgName', 'orgPassword']
-		for (var i in fields) {
+		for (let i = 0; i < fields.length; i++) {
 			data[fields[i]] = (valOf(fields[i]))
 			document.getElementById(fields[i]).style.border = '1px solid #273135'
 		}
@@ -103,7 +103,9 @@ class Signup extends Component {
 				error: (res)=>{
 					$('.error-flash').html('Server Unavailable.').css('color', 'red')
 				}
-			})
+			});
+
+			$('#org-email-flash').html('Must be a unique domain').css('color', 'black');
 		}
 	}
 
@@ -111,7 +113,7 @@ class Signup extends Component {
 	render(){
 		return (
 	<div className="form-container">
-		<form method="post" action="/api/signup" id="signup-form" onSubmit={(e)=>this.handleSubmit(e)}>
+		<form method="post" id="signup-form" onSubmit={(e)=>this.handleSubmit(e)}>
 			<h3>Make work easier now.</h3>
 			<input type="text" id="ownerName" className="hm-input" placeholder="Account owner's name" />
 			<input type="text" id="ownerEmail" className="hm-input" placeholder="Account owner's email" onBlur={(e)=>this.checkDomain(e)}/>

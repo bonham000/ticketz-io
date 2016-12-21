@@ -97,6 +97,11 @@ input {
     position: absolute;
     left: 50px; top: 10px;
 }
+#hm-new-ticket-btn {
+    position: absolute;
+    left: 150px; top: 10px;
+    color: white;
+}
 #signup-btn {
     position: absolute;
     background-color: #de5939;
@@ -115,6 +120,7 @@ input {
 .error-flash {
     text-align: center;
     font-weight: bold;
+    margin-top: 15px;
 }
 .home-big-text {
     font-size: 8vw;
@@ -129,3 +135,5 @@ input {
         font-size: 6vw;
     }
 }
+
+
