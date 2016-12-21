@@ -1,5 +1,5 @@
 #top-select-bar {
-    margin: 30px auto;
+    margin: 10px auto;
     display: flex;
     justify-content: center;
 }
@@ -34,6 +34,5 @@
     border-top-right-radius: 10px;
 }
 #search-container {
-    width: 400px;
     margin: 0 auto;
 }

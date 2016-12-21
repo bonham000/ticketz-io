@@ -10,9 +10,9 @@ class AppAdmin extends Component {
   constructor(){
     super();
     this.state = {
-    	admins: [],
-    	username: '',
     	user: {},
+    	admins: [],
+    	organization: {},
     	showNav: true
     };
   }
@@ -46,14 +46,16 @@ class AppAdmin extends Component {
 		window.addEventListener('resize', this.handleResize);
 		$('body').css('background', 'none');
 		$('#admin-portal').hide();
+		$('#loader').show();
 		$.get('/api/validateAuth', (user)=>{
 			if (user) {
-				$.get('/api/initialData', (data)=>{
-					this.setState({admins: data, username: user.username, user: user});
-					$('#admin-portal').show()
+				$.getJSON('/api/initialData', (data)=>{
+					this.setState({admins: data.admins, user: user, organization: data.organization});
+					$('#admin-portal').show();
+					$('#loader').hide();
 				})
 			}
-			else window.location.href = '/app/login';
+			else window.location.href = '/login';
 		})
 	}
 	componentWillUnmount(){
@@ -74,36 +76,43 @@ class AppAdmin extends Component {
 	}
   render(){
     return (
-      <div id="admin-portal">
+    	<div>
+
+    		<div id="loader"></div>
+
+      		<div id="admin-portal">
 				
 				<div id="profile-box">
 					<div id="menu-btn-box" className="prof-box-btn" onClick={this.animateNavbar}><i className="fa fa-bars" /></div>
-					<div id="profile-box-name"><Link to="/dashboard">{this.state.username}</Link></div>
+					<div id="profile-box-name"><Link to="/dashboard">{this.state.user.name}</Link></div>
 					<div className="prof-box-btn"><Link to="/dashboard/settings"><i className="fa fa-cogs" /></Link></div>
 					<div className="prof-box-btn" onClick={()=>this.handleLogout()}><i className="fa fa-lock" /></div>
 				</div>
 				
-        <div id="admin-navbar">
+        		<div id="admin-navbar">
 					<Link to="/dashboard"><div className="navbtn">Dashboard</div></Link>
 					<Link to="/dashboard/tickets"><div className="navbtn">Tickets</div></Link>
 					<Link to="/dashboard/editusers"><div className="navbtn">Users</div></Link>
 					<Link to="/dashboard/tasks"><div className="navbtn">Tasks</div></Link>
-        </div>
+        		</div>
 				
-        <div id="admin-content">
+
+
+        		<div id="admin-content">
 					{this.props.children &&
 						React.cloneElement(
 							this.props.children,
 							{admins: this.state.admins,
 								user: this.state.user,
-								username: this.state.username,
+								organization: this.state.organization,
 								updateAdmins: (data)=>this.updateAdmins(data),
 								createAdmin: (data)=>this.createAdmin(data),
 								deleteAdmin: (data)=>this.deleteAdmin(data)
 							}
 						)}
-        </div>
+        	</div>
 
+      	</div>
       </div>
     )
   }

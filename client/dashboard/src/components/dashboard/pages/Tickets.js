@@ -10,32 +10,36 @@ class Tickets extends Component {
 	constructor(){
 		super();
 		this.state = {
-			loading: <div className="center"><i className="fa fa-circle-o-notch fa-spin fa-2x" /></div>,
+			loading: <div id="loader-sm" />,
 			tickets: [],
-			searchBox: <div></div>
+			searchBox: <div />
 		}
 	}
 	loadActive(){
 		$.post('/api/querytickets', {status: "New"}, (tickets)=>{
-			this.setState({tickets: tickets, loading: <div></div>})
+			this.setState({tickets: tickets, loading: <div />})
 		})
 	}
 	loadArchive(){
 		$.post('/api/querytickets', {status: "Complete"}, (tickets)=>{
-			this.setState({tickets: tickets, loading: <div></div>})
+			this.setState({tickets: tickets, loading: <div />})
 		})
 	}
 	advancedSearch(){
-		this.setState({tickets: [], loading: <div></div>, searchBox: <SearchBox admins={this.props.admins} submitSearch={(query)=>this.submitSearch(query)}/>})
+		console.log(this.props.organization)
+		this.setState({tickets: [], loading: <div />, searchBox: <SearchBox 
+			admins={this.props.admins} 
+			organization={this.props.organization}
+			submitSearch={(query)=>this.submitSearch(query)}/>})
 	}
 	submitSearch(query){
 		console.log(query)
 		this.setState({
 			tickets: [],
-			loading: <div className="center"><i className="fa fa-circle-o-notch fa-spin fa-2x" /></div>
+			loading: <div id="loader-sm" />
 		})
 		$.post('/api/querytickets', query, (tickets)=>{
-			this.setState({tickets: tickets, loading: <div></div>})
+			this.setState({tickets: tickets, loading: <div />})
 		})
 	}
 	
@@ -44,8 +48,8 @@ class Tickets extends Component {
 		$('.tk-topbtn').click((e)=>{
 			this.setState({
 				tickets: [],
-				loading: <div className="center"><i className="fa fa-circle-o-notch fa-spin fa-2x" /></div>,
-				searchBox: <div></div>
+				loading: <div id="loader-sm" />,
+				searchBox: <div />
 			})
 			$('.tk-topbtn').css('background-color', '#273135')
 			$('#' + e.target.id).css('background-color', '#fa7252')
@@ -54,18 +58,19 @@ class Tickets extends Component {
 			if (e.target.id === 'archive-tickets-btn') this.loadArchive();
 			
 		})
-	}//get ready for some mad react templating skills
+	}
 	
 	
 	render() {
 		return (
 			<div>
+				<div className="card">
+
 				<div id="top-select-bar">
 					<div id="active-tickets-btn" className="tk-topbtn">Active</div>
 					<div id="advanced-search-btn" className="tk-topbtn">Search</div>
 					<div id="archive-tickets-btn" className="tk-topbtn">Archive</div>
 				</div>
-				<div className="card">
 				{this.state.searchBox}
 				{this.state.loading}
 				{this.state.tickets.map((ticket)=>{

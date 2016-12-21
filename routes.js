@@ -101,13 +101,6 @@ router.post('/api/createadmin', function(req, res){
 		})
 });
 
-//CREATE: sign up form --> creates a new organization in DB
-// NOTE — this route is no longer being used ... ?
-router.post('/api/signup', function(req, res){
-	console.log(req.body)
-	res.send('awesome!')
-});
-
 
 
 
@@ -129,21 +122,35 @@ router.get('/api/validateAuth', function(req, res){
 	}
 	else res.send(false)
 })
-//READ: sends the names of the users in same dpt
+//READ: sends the initial data for the portal
 router.get('/api/initialData', function(req, res){
-    User.find({dpt: req.user.dpt2}, function(err, users){
+	var responses = 0
+	var data = {};
+    User.find({organization: req.user.organization}, function(err, admins){ //finds all other users in organization
         if (err) throw err;
-        res.send(users);
+        data.admins = admins
+        responses++
+        sendSyncResult()
     })
+	Organization.findOne({orgName: req.user.organization}, function(err, org){
+		if (err) throw err;
+		data.organization = org
+		responses++
+		sendSyncResult()
+    })
+    function sendSyncResult(){
+    	if (responses === 2) {
+    		res.send(JSON.stringify(data))
+    	};
+    }
 });
 //READ:
 //Handles all the advanced search functionality.
 //Just make a POST request, with a JSON object of your search params!
 router.post('/api/querytickets', function(req, res){
 	console.log(req.user);
-	if (req.body.assignedto === 'true') req.body.assignedto = req.user.username
 	if (req.body.description) req.body.description = new RegExp(req.body.description, "i")
-	req.body.dpt = req.user.dpt;
+	req.body.organization = req.user.organization
 	Ticket.find(req.body).sort({date: -1}).exec(function(err, tickets){
 		if (err) throw err;
 		res.send(tickets);

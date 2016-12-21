@@ -25,22 +25,10 @@ class SearchBox extends Component {
 								<i className="fa fa-compass" />
 							</div>
 							<select className="form-control" id="search-site">
-								<option value="">School Site</option>
-								<option>Amberlea</option>
-								<option>Canyon Breeze</option>
-								<option>Copper King</option>
-								<option>Desert Horizon</option>
-								<option>Desert Mirage</option>
-								<option>District Office</option>
-								<option>Garden Lakes</option>
-								<option>Pendergast Community Center</option>
-								<option>Pendergast Elementary</option>
-								<option>Pendergast Learning Center</option>
-								<option>Rio Vista</option>
-								<option>Sonoran Sky</option>
-								<option>Sunset Ridge</option>
-								<option>Villa De Paz</option>
-								<option>Westwind</option>
+								<option value="">Site</option>
+								{this.props.organization.sites.map(function(site){
+									return <option>{site}</option>
+								})}
 							</select>
 						</div>
 					</div>
@@ -90,7 +78,8 @@ class SearchBox extends Component {
 					</div>
 					<select id="search-assignedto" className="form-control">
 						<option value="">Assigned To</option>
-						{this.props.admins.map((admin)=>{
+						{this.props.admins && 
+							this.props.admins.map((admin)=>{
 							return <option>{admin.username}</option>
 						})}
 					</select>

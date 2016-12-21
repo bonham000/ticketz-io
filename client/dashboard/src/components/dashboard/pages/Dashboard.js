@@ -7,15 +7,15 @@ class Dashboard extends Component {
 	constructor(){
 		super();
 		this.state = {
-			loading: <div className="center"><i className="fa fa-circle-o-notch fa-spin fa-2x" /></div>,
+			loading: <div id="loader-sm" />,
 			tickets: []
 		}
 	}
 	componentWillMount(){
-			let data = {assignedto: true, status: "New"};
+			let data = {status: "New", assignedto: this.props.user.username};
 			$.post('/api/querytickets', data, (tickets)=>{
 				if (tickets.length) {
-					this.setState({tickets: tickets, loading: <div></div>})
+					this.setState({tickets: tickets, loading: <div />})
 				} else {
 					this.setState({loading: <div>You don't have any tickets assigned to you!</div>})
 				}
