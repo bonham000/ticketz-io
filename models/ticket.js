@@ -12,7 +12,8 @@ var ticketSchema = new Schema({
     status: String,
     assignedto: String,
     note: String,
-    date: String
+    date: String,
+    organization: String
 });
 
 var Ticket = mongoose.model('Ticket', ticketSchema);

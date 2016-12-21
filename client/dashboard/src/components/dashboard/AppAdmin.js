@@ -11,7 +11,7 @@ class AppAdmin extends Component {
     super();
     this.state = {
     	admins: [],
-    	username: <i className="fa fa-spinner fa-pulse" />,
+    	username: '',
     	user: {},
     	showNav: true
     };
