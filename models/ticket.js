@@ -3,7 +3,6 @@ var Schema = mongoose.Schema;
 
 var ticketSchema = new Schema({
     _id: Number,
-    dpt: String,
     name: String,
     email: String,
     phone: String,
