@@ -69,23 +69,36 @@ router.get('/api/organizations', function(req, res) {
 
 
 //CREATE: New ticket is submitted
-router.post('/api/newticket', function(req, res){
-	var data = req.body;
-	data.email = data.email.toLowerCase();
-	data.status = 'New';
-	data.assignedto = '';
-	data.note = '';
-	data.date = moment().format('MMMM DD YYYY, h:mm a');
-	data._id = _idcount;
+router.post('/api/new-ticket', function(req, res){
+	let ticket = req.body;
+	let password = ticket.password;
+	console.log(password);
+	// verify organization password here
+	// successful, submit new ticket and send status 200 to client
+	delete ticket.password;
+	ticket.status = "New";
+	ticket.assignedto = '';
+	ticket.note = '';
+	ticket.date = moment().format('MMMM DD YYYY, h:mm a');
+	ticket._id = _idcount;
 	_idcount ++;
+
+	console.log(ticket);
+
+	res.send(200);
 	
-	var newticket = new Ticket(data);
-	newticket.save(function(err){
-		if (err) throw err;
-		console.log(req.body.name + ' has just submitted a ticket!');
-		res.end();
-	});
+	// var newticket = new Ticket(ticket);
+	// newticket.save(function(err){
+	// 	if (err) throw err;
+	// 	console.log(req.body.name + ' has just submitted a ticket!');
+	// 	res.end();
+	// });
+
+	// if password is not valid, return unauthorized message, this
+	// will need to be handled in the new ticket component
+
 });
+
 //CREATE: makes a new admin account
 router.post('/api/createadmin', function(req, res){
 		User.findOne({username: req.body.username.toLowerCase()}, function (err, user) {

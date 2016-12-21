@@ -1,0 +1,38 @@
+.new-ticket {
+	max-width: 600px;
+	margin: auto;
+	padding-bottom: 75px;
+	background: mintcream;
+}
+.ticketLabel {
+	margin-bottom: -15px;
+}
+.newTicketTitle {
+	text-align: center;
+	padding-bottom: 15px;
+	margin-bottom: 15px;
+	border-bottom: 1px solid rgba(15,15,15,0.5);
+}
+.newTicketLabel {
+	margin-left: 50px;
+}
+
+.ticket-input {
+	font-size: 16px;
+}
+
+#description {
+	font-size: 18px;
+	margin: 15px auto;
+	border: 1px solid black;
+}
+
+#btn-submit {
+	width: 300px;
+	font-size: 24px;
+	margin-top: 15px;
+}
+
+.error-message {
+	text-align: center;
+}

@@ -16,10 +16,12 @@ class App extends Component {
     			<div className="hm-container">
     				{this.props.children}
     			</div>
-    			<div className="footer-container">This is a footer... ~ Captain Obvious</div>
+                <div className="footer-container">This is a footer... ~ Captain Obvious</div>    			
     		</div>
 		);
 	}
 };
+
+
 
 export default App
