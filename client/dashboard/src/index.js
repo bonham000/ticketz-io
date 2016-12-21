@@ -5,6 +5,7 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 
 //home components
 import App from './components/home/App.js';
+import NewTicket from './components/home/pages/NewTicket.js';
 import Home from './components/home/pages/Home.js';
 import Signup from './components/home/pages/Signup.js';
 import Login from './components/home/pages/Login.js';
@@ -27,6 +28,7 @@ class Index extends Component {
 			<Router history={browserHistory}>
 				<Route path="/" component={App}>
 					<IndexRoute component={Home} />
+					<Route path="/new-ticket" component={NewTicket} />
 					<Route path="/login" component={Login} />
 					<Route path="/signup" component={Signup} />
 				</Route>

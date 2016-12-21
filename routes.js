@@ -24,13 +24,14 @@ mongoose.connection.on('connected', function () {
 
 //CRUD APIs
 //CREATE: Create new organization
-router.get('/api/checkdomain/:domain', function(req, res){
-	Organization.find({domain: req.params.domain}, function(err, orgs){
+router.get('/api/checkdomain/:email', function(req, res){
+	Organization.find({ownerEmail: req.params.email}, function(err, orgs){
 		if (err) throw err;
 		if (orgs.length === 0) { res.status(200).send() }
 		else { res.status(500).send() }
 	})
 })
+
 router.post('/api/createorg', function(req, res){
 
 	var orgdata = req.body
@@ -40,23 +41,33 @@ router.post('/api/createorg', function(req, res){
 		if (err) throw err;
 		console.log(req.body.domain + ' is registering an account...')
 
-		var userdata = {}
-		userdata.name = req.body.ownerName
-		userdata.username = req.body.ownerEmail
-		userdata.password = req.body.ownerPassword
-		userdata.domain = req.body.domain
-		userdata.role = 'owner'
-		console.log(userdata)
+		var userdata = {
+			name: req.body.ownerName,
+			username: req.body.ownerEmail,
+			password: req.body.ownerPassword,
+			role: 'owner',
+			organization: orgdata.orgName
+		};
+
 		var newuser = new User(userdata)
 		newuser.save(function(err){
 			if (err) throw err;
-			console.log('successful!')
+			console.log('User added successfully: ', newuser);
 			res.end()
 		})
 	})
+});
+
+router.get('/api/organizations', function(req, res) {
+	Organization.find({}, function(err, docs) {
+		if (!err) {
+			console.log(docs);
+			res.status(201).send(docs);
+		};
+	});
+});
 
 
-})
 //CREATE: New ticket is submitted
 router.post('/api/newticket', function(req, res){
 	var data = req.body;
@@ -89,9 +100,10 @@ router.post('/api/createadmin', function(req, res){
 			}
 		})
 });
+
 //CREATE: sign up form --> creates a new organization in DB
+// NOTE — this route is no longer being used ... ?
 router.post('/api/signup', function(req, res){
-	console.log('req sent!')
 	console.log(req.body)
 	res.send('awesome!')
 });
@@ -119,7 +131,7 @@ router.get('/api/validateAuth', function(req, res){
 })
 //READ: sends the names of the users in same dpt
 router.get('/api/initialData', function(req, res){
-    User.find({dpt: req.user.dpt}, function(err, users){
+    User.find({dpt: req.user.dpt2}, function(err, users){
         if (err) throw err;
         res.send(users);
     })
@@ -128,6 +140,7 @@ router.get('/api/initialData', function(req, res){
 //Handles all the advanced search functionality.
 //Just make a POST request, with a JSON object of your search params!
 router.post('/api/querytickets', function(req, res){
+	console.log(req.user);
 	if (req.body.assignedto === 'true') req.body.assignedto = req.user.username
 	if (req.body.description) req.body.description = new RegExp(req.body.description, "i")
 	req.body.dpt = req.user.dpt;
