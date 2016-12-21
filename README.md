@@ -23,14 +23,15 @@ get creative as well -- restyle pages, and add new modules and features! Thanks!
 [![Join the chat at https://gitter.im/ticketz-io/Lobby](https://badges.gitter.im/ticketz-io/Lobby.svg)](https://gitter.im/ticketz-io/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 TO DO:
-Registration page for organizations <-- I'm working on this one
+Replace "Users" page with "Organization" page <-- I'm working on this one
 
-Refactor Ticket Submission page
+Finish "/new-ticket/:orgName"
 
-Refactor Login method
+Fix/finish issues with signup form
+  -Allows password less than 8 characters
+  -Auto log-in on successful creation
+  -At some point we probably want to have email confirmation of any email addresses used
 
-Refactor/cleanup dashboard
-
-Add charts/reports to dashboard
-
-Gamify dashboard
+Add extra modules to Dashboard
+  -bar chart of tickets completed this week, by user
+  
