@@ -74,6 +74,12 @@ class AppAdmin extends Component {
 		let elem = document.getElementById('admin-navbar');
 		(elem.style.left === '-200px') ? elem.style.left = '0' : elem.style.left = '-200px';
 	}
+
+	componentDidUpdate(prevProps, prevState) {
+		$('.navbtn').removeClass('activeNavbtn')
+		//Contains the name of the page loaded --> Dashboard/Tickets/EditUsers/Tasks/Settings
+		$('#' + this.props.children.type.name).addClass('activeNavbtn')
+	}
   render(){
     return (
     	<div>
@@ -90,10 +96,10 @@ class AppAdmin extends Component {
 				</div>
 				
         		<div id="admin-navbar">
-					<Link to="/dashboard"><div className="navbtn">Dashboard</div></Link>
-					<Link to="/dashboard/tickets"><div className="navbtn">Tickets</div></Link>
-					<Link to="/dashboard/editusers"><div className="navbtn">Users</div></Link>
-					<Link to="/dashboard/tasks"><div className="navbtn">Tasks</div></Link>
+					<Link to="/dashboard"><div className="navbtn" id="Dashboard">Dashboard</div></Link>
+					<Link to="/dashboard/tickets"><div className="navbtn" id="Tickets">Tickets</div></Link>
+					<Link to="/dashboard/editusers"><div className="navbtn" id="EditUsers">Users</div></Link>
+					<Link to="/dashboard/tasks"><div className="navbtn" id="Tasks">Tasks</div></Link>
         		</div>
 				
 

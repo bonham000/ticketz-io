@@ -80,6 +80,11 @@ Mobile First!
 .navbtn:hover {
     background-color: #171d20;
 }
+.activeNavbtn {
+    background-color: #171d20;
+    border-left: 5px solid #6dcab7;
+    padding-left: 15px;
+}
 
 
 
