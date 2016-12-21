@@ -4,7 +4,8 @@
   "description": "pre-alpha ticket management system",
   "main": "server.js",
   "scripts": {
-    "start": "babel-watch server.js"
+    "dev": "babel-watch server.js",
+    "start": "node server.js"
   },
   "author": "Ethan Rose",
   "license": "ISC",
