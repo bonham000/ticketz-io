@@ -15,7 +15,7 @@ export default class NewTicket extends React.Component {
 			name: '',
 			email: '',
 			phone: '',
-			site: '',
+			select: 'default',
 			room: '',
 			description: '',
 			password: ''
@@ -54,14 +54,39 @@ export default class NewTicket extends React.Component {
 			this.setState({ errors, complete });
 		};
 	}
-	handleChange = (event) => {		
+	handleChange = (event) => {
+		let { errors } = this.state;
+		errors[event.target.name] = false;
 		this.setState({
-			[event.target.name]: event.target.value
+			[event.target.name]: event.target.value,
+			errors
+		});
+	}
+	handleSelect = (event) => {
+		let { errors, complete } = this.state;
+		if (event.target.value !== 'default') {
+			errors.site = false;
+			complete.site = true;
+		};
+		this.setState({
+			select: event.target.value,
+			errors,
+			complete
 		});
 	}
 	submitTicket = (event) => {
 		event.preventDefault();
-		let { complete } = this.state;
+		let { errors, complete } = this.state;
+		let state = Object.assign({}, this.state);
+		if (state.name == '') errors.name = true;
+		if (state.email == '') errors.email = true;
+		if (state.phone == '') errors.phone = true;
+		if (state.select == 'default') errors.site = true;
+		if (state.room == '') errors.room = true;
+		if (state.description == '') errors.description = true;
+		if (state.password == '') errors.password = true;
+		this.setState({ errors });
+
 		let keys = Object.keys(complete);
 		if (keys.length === 7) {
 			let data = Object.assign({}, this.state);
@@ -119,34 +144,46 @@ export default class NewTicket extends React.Component {
 								<label className="ticketLabel" htmlFor="phone">Your Phone:</label>
 								<input
 									name="phone"
-									onBlur={this.completed}
+									onBlur={this.checkInput}
 									value={this.state.phone}
 									onChange={this.handleChange}
 									className="form-control hm-input ticket-input"
 									placeholder="Your Phone"/>
 							</div>
+
+							{ errors.phone && 
+								<div className="alert alert-danger error-message">
+		  						<strong>Your phone is required.</strong>
+								</div> }
 							
 							<div className={classnames("form-group", { 'has-success': complete.site })}>
 								<label className="ticketLabel" htmlFor="site">Your Work Site:</label>
-								<input
-									name="site"
-									onBlur={this.completed}
-									value={this.state.site}
-									onChange={this.handleChange}
-									className="form-control hm-input ticket-input"
-									placeholder="Site"/>
+								<select value={this.state.select} onChange={this.handleSelect} name="siteSelecter" className="form-control site-selector">
+									<option value="default">Select Your Work Site</option>
+									<option value="site1">Site 1</option>
+								</select>
 							</div>
+
+							{ errors.site && 
+								<div className="alert alert-danger error-message">
+		  						<strong>You must select a site.</strong>
+								</div> }
 							
 							<div className={classnames("form-group", { 'has-success': complete.room })}>
 								<label className="ticketLabel" htmlFor="room">Room:</label>
 								<input
 									name="room"
-									onBlur={this.completed}
+									onBlur={this.checkInput}
 									value={this.state.room}
 									onChange={this.handleChange}
 									className="form-control hm-input ticket-input"
 									placeholder="Room"/>
 							</div>
+
+							{ errors.room && 
+								<div className="alert alert-danger error-message">
+		  						<strong>Your room is required.</strong>
+								</div> }
 							
 							<div className={classnames("form-group", { 'has-error': errors.description, 'has-success': complete.description })}>
 								<label className="ticketLabel" htmlFor="description">Please Describe Your Problem:</label>
