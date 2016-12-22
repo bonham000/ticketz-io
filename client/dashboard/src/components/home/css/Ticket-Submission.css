@@ -18,13 +18,17 @@
 }
 
 .ticket-input {
+	text-align: left;
 	font-size: 16px;
+}
+
+.site-selector {
+	margin-top: 15px;
 }
 
 #description {
 	font-size: 18px;
 	margin: 15px auto;
-	border: 1px solid black;
 }
 
 #btn-submit {

@@ -14,7 +14,7 @@ export default class NewTicketSearch extends React.Component {
 	componentDidMount() {
 		axios.get('/api/organizations').then(response => {
 			let organizations = response.data.reduce((orgs, org) => {
-				return (orgs.indexOf(org.orgName) === -1) ? orgs.concat(org.orgName) : orgs;
+				return (orgs.indexOf(org.orgName) === -1) ? orgs.concat(org.orgName.toLowerCase()) : orgs;
 			}, []);
 			this.setState({ organizations });
 		}).catch(err => console.error(err));
@@ -28,7 +28,7 @@ export default class NewTicketSearch extends React.Component {
 	submitRequest = (event) => {
 		event.preventDefault();
 		let { input, organizations } = this.state;
-		if (organizations.indexOf(input) !== -1) {
+		if (organizations.indexOf(input.toLowerCase()) !== -1) {
 			browserHistory.push(`/new-ticket/${this.state.input}`);
 		} else {
 			this.setState({
