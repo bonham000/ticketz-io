@@ -1,0 +1,16 @@
+.round-blue-btn {
+	background-color: #7cd5ba;
+	font-weight: bold;
+	font-size: 20px;
+	text-align: center;
+	color: white;
+	width: 40px; height: 40px; line-height: 40px;
+	border-radius: 50%;
+	cursor: pointer;
+	box-shadow: 0 1px 1px rgba(0,0,0,.12), 0 1px 3px rgba(0,0,0,.24);
+	transition: box-shadow .3s;
+	margin: 0 auto;
+}
+.round-blue-btn:hover {
+	box-shadow: 0 1px 5px rgba(0,0,0,.18), 0 1px 10px rgba(0,0,0,.36);
+}

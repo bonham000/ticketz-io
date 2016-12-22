@@ -90,7 +90,6 @@ class Signup extends Component {
 		}
 
 		if (this.state.valid){
-			data.domain = this.state.domain;
 
 			$.ajax({
 				method: 'post',

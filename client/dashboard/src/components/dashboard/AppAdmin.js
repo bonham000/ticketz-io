@@ -7,16 +7,22 @@ import $ from 'jquery';
 //to access the admins from any child component
 //this.props.admins[0].username
 class AppAdmin extends Component {
-  constructor(){
-    super();
-    this.state = {
-    	user: {},
-    	admins: [],
-    	organization: {},
-    	showNav: true
-    };
-  }
-  updateAdmins(data){
+  	constructor(){
+    	super();
+    	this.state = {
+    		user: {},
+	    	admins: [],
+    		organization: {},
+    		showNav: true
+    	};
+  	}
+	handleAddSite(e){
+		e.preventDefault()
+		var sites = this.state.organization.sites
+		sites.push(document.getElementById('site-input').value)
+		this.setState({organization[sites]: sites})
+	}
+  	updateAdmins(data){
 		let updatedAdmins = this.state.admins;
 		let updatedUser = this.state.user;
 		
@@ -127,6 +133,7 @@ class AppAdmin extends Component {
 							{admins: this.state.admins,
 								user: this.state.user,
 								organization: this.state.organization,
+								handleAddSite: (e)=>this.handleAddSite(e),
 								updateAdmins: (data)=>this.updateAdmins(data),
 								createAdmin: (data)=>this.createAdmin(data),
 								deleteAdmin: (data)=>this.deleteAdmin(data)

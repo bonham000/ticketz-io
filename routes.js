@@ -31,11 +31,12 @@ router.get('/api/checkdomain/:email', function(req, res){
 		else { res.status(500).send() }
 	})
 })
-
+//CREATE: Someone registers to create an organization & a new user
 router.post('/api/createorg', function(req, res){
 
 	var orgdata = req.body
 	orgdata.date = moment().format('MMMM DD YYYY, h:mm a');
+
 	var neworg = new Organization(orgdata)
 	neworg.save(function(err){
 		if (err) throw err;

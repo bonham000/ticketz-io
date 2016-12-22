@@ -16,8 +16,8 @@ class Login extends Component {
 
             <p style={{"textAlign": "center"}}>
             <b>DEMO login</b><br />
-            username: admin<br />
-            password: admin
+            username: demo.user@live.com<br />
+            password: password
             </p>
 
         </div>
