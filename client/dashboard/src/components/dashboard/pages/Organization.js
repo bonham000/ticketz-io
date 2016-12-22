@@ -8,8 +8,15 @@ class Organization extends Component {
     		<div>
 				<div className="flex-card-half">
 					<h3>General</h3>
-					Your organization's unique URL: <br/>
-					{'ticketz.io/new-ticket' + this.props.organization.url}
+					<p style={{textAlign: "left"}}>
+					Tickets may be submitted with your organization's unique information.<br />
+					<b>URL: </b> {'ticketz.io/new-ticket' + this.props.organization.url}<br />
+					<b>Submittal Password: </b> {this.props.organization.orgPassword}
+					</p>
+					
+					<div className="card-divider" />
+
+
 				</div>
 
 				<div className="flex-card-half">

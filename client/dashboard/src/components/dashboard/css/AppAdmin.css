@@ -97,6 +97,8 @@ Mobile First!
     min-height: 100vh;
 }
 
+
+
 /*Cards*/
 .card {
     padding: 10px;
@@ -126,6 +128,13 @@ Mobile First!
     overflow: hidden;
     vertical-align: top;
 }
+.card-divider {
+    height: 1px; width: 80%;
+    background-color: rgba(0,0,0,.2);
+    margin: 20px auto;
+}
+
+
 
 
 /*tablet sized screens*/
