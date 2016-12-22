@@ -1,0 +1,16 @@
+
+.find-organization {
+	max-width: 500px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.find-organization-form {
+	margin-top: 25px;
+}
+
+.find-org-btn {
+	width: 280px;
+	font-size: 26px;
+	margin-top: 25px;
+}

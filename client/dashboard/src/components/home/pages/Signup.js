@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
+import axios from 'axios'
 
 class Signup extends Component {
 	constructor(){
@@ -16,21 +17,15 @@ class Signup extends Component {
 			$('#org-email-flash').html('Invalid email address').css('color', 'red')
 			this.setState({valid: false})
 		} else {
-
-		var domain = e.target.value.slice(e.target.value.indexOf('@') + 1)
-		$('#org-email-flash').html('<i class="fa fa-circle-o-notch fa-spin"></i>').css('color', 'black')
-		$.ajax({
-			method: 'get',
-			url: '/api/checkdomain/' + e.target.value,
-			success: (res)=>{
-				this.setState({valid: true, domain: domain})
-				$('#org-email-flash').html('<i class="fa fa-check" /> Email is available!').css('color', 'green')
-			},
-			error: (res)=>{
-				this.setState({valid: false})
-				$('#org-email-flash').html('<i class="fa fa-times" /> Email is taken.').css('color', 'red')
-			}
-			})
+			var domain = e.target.value.slice(e.target.value.indexOf('@') + 1)
+			$('#org-email-flash').html('<i class="fa fa-circle-o-notch fa-spin"></i>').css('color', 'black');
+			axios.get('/api/checkdomain/' + e.target.value).then((response) => {
+					this.setState({valid: true, domain: domain});
+					$('#org-email-flash').html('<i class="fa fa-check" /> Email is available!').css('color', 'green');
+			}).catch((err) => {
+				this.setState({valid: false});
+				$('#org-email-flash').html('<i class="fa fa-times" /> Email is taken.').css('color', 'red');
+			});
 		}
 	}
 	handleSubmit(e){
@@ -90,45 +85,35 @@ class Signup extends Component {
 		}
 
 		if (this.state.valid){
-
-			$.ajax({
-				method: 'post',
-				url: '/api/createorg',
-				data: data,
-				success: (res)=>{
-					document.getElementById('signup-form').reset()
-					$('.error-flash').html('Success! You can now log in.').css('color', 'green')
-				},
-				error: (res)=>{
-					$('.error-flash').html('Server Unavailable.').css('color', 'red')
-				}
+			axios.post('/api/createorg', data).then((response) => {
+				document.getElementById('signup-form').reset()
+				$('.error-flash').html('Success! You can now log in.').css('color', 'green')
+			}).catch((err) => {
+				$('.error-flash').html('Server Unavailable.').css('color', 'red')
 			});
-
 			$('#org-email-flash').html('Must be a unique domain').css('color', 'black');
 		}
 	}
-
-
 	render(){
 		return (
-	<div className="form-container">
-		<form method="post" id="signup-form" onSubmit={(e)=>this.handleSubmit(e)}>
-			<h3>Make work easier now.</h3>
-			<input type="text" id="ownerName" className="hm-input" placeholder="Account owner's name" />
-			<input type="text" id="ownerEmail" className="hm-input" placeholder="Account owner's email" onBlur={(e)=>this.checkDomain(e)}/>
-			<h6 id="org-email-flash">Must be a unique domain</h6><br />
+			<div className="form-container">
+				<form method="post" id="signup-form" onSubmit={(e)=>this.handleSubmit(e)}>
+					<h3>Make work easier now.</h3>
+					<input type="text" id="ownerName" className="hm-input" placeholder="Account owner's name" />
+					<input type="text" id="ownerEmail" className="hm-input" placeholder="Account owner's email" onBlur={(e)=>this.checkDomain(e)}/>
+					<h6 id="org-email-flash">Must be a unique domain</h6><br />
 
-			<input type="password" id="ownerPassword" className="hm-input" placeholder="Password" />
-			<input type="password" id="confirmPassword" className="hm-input" placeholder="Confirm password" />
-			<h6>Must contain at least 8 characters</h6><br />
+					<input type="password" id="ownerPassword" className="hm-input" placeholder="Password" />
+					<input type="password" id="confirmPassword" className="hm-input" placeholder="Confirm password" />
+					<h6>Must contain at least 8 characters</h6><br />
 
-			<input type="text" id="orgName" className="hm-input" placeholder="Name of organization" />
-			<input type="text" id="orgPassword" className="hm-input" placeholder="Organization password" />
-			<h6>For security, this password will be required every time someone attempts to submit a ticket</h6>
-			<button className="hm-btn" type="submit" id="authenticate-btn">Submit</button>
-			<div className="error-flash"></div>
-		</form>
-	</div>
+					<input type="text" id="orgName" className="hm-input" placeholder="Name of organization" />
+					<input type="text" id="orgPassword" className="hm-input" placeholder="Organization password" />
+					<h6>For security, this password will be required every time someone attempts to submit a ticket</h6>
+					<button className="hm-btn" type="submit" id="authenticate-btn">Submit</button>
+					<div className="error-flash"></div>
+				</form>
+			</div>
 		)
 	}
 }

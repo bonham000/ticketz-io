@@ -2,6 +2,8 @@ import React from 'react';
 import { browserHistory } from 'react-router';
 import axios from 'axios';
 
+import '../css/Find-Organization.css';
+
 export default class NewTicketSearch extends React.Component {
 	constructor(props) {
 		super(props);
@@ -13,10 +15,7 @@ export default class NewTicketSearch extends React.Component {
 	}
 	componentDidMount() {
 		axios.get('/api/organizations').then(response => {
-			let organizations = response.data.reduce((orgs, org) => {
-				return (orgs.indexOf(org.orgName) === -1) ? orgs.concat(org.orgName.toLowerCase()) : orgs;
-			}, []);
-			this.setState({ organizations });
+			this.setState({ organizations: response.data.urls });
 		}).catch(err => console.error(err));
 	}
 	handleChange = (event) => {
@@ -28,8 +27,8 @@ export default class NewTicketSearch extends React.Component {
 	submitRequest = (event) => {
 		event.preventDefault();
 		let { input, organizations } = this.state;
-		if (organizations.indexOf(input.toLowerCase()) !== -1) {
-			browserHistory.push(`/new-ticket/${this.state.input}`);
+		if (organizations.indexOf(input) !== -1) {
+			browserHistory.push(`/new-ticket/${input}`);
 		} else {
 			this.setState({
 				error: true
@@ -38,9 +37,9 @@ export default class NewTicketSearch extends React.Component {
 	}
 	render() {
 		return (
-			<div className="form-container">
+			<div className="find-organization">
 				<h3>Type in Your Organization Name Here:</h3>
-				<form onSubmit={this.submitRequest} className="form-group">
+				<form onSubmit={this.submitRequest} className="form-group find-organization-form">
 					<input
 						type="text"
 						placeholder="Your Organization's Name"
@@ -52,7 +51,7 @@ export default class NewTicketSearch extends React.Component {
   						<strong>This organization is not entered in the system.</strong> <br />
   						Did you type the name correctly?
 						</div> }
-					<button type="submit" className="btn-success hm-btn">Submit</button>
+					<button type="submit" className="btn-primary hm-btn find-org-btn">Submit</button>
 				</form>
 			</div>
 		);
