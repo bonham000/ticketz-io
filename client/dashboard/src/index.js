@@ -16,7 +16,7 @@ import Login from './components/home/pages/Login.js';
 import AppAdmin from './components/dashboard/AppAdmin';
 import Dashboard from './components/dashboard/pages/Dashboard';
 import Tickets from './components/dashboard/pages/Tickets';
-import EditUsers from './components/dashboard/pages/EditUsers';
+import Organization from './components/dashboard/pages/Organization';
 import Settings from './components/dashboard/pages/Settings';
 import Tasks from './components/dashboard/pages/Tasks';
 import PageNotFound from './components/dashboard/pages/PageNotFound';
@@ -37,9 +37,8 @@ class Index extends Component {
 				<Route path="/dashboard" component={AppAdmin}>
 					<IndexRoute component={Dashboard} />
 					<Route path="tickets" component={Tickets} />
-					<Route path="editusers" component={EditUsers} />
+					<Route path="organization" component={Organization} />
 					<Route path="settings" component={Settings} />
-					<Route path="tasks" component={Tasks} />
 				</Route>
 				<Route path="*" component={PageNotFound} />
 			</Router>

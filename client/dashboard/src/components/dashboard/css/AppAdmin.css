@@ -96,6 +96,8 @@ Mobile First!
     background-color: #e9f0f5;
     min-height: 100vh;
 }
+
+/*Cards*/
 .card {
     padding: 10px;
     background-color: white;
@@ -103,6 +105,7 @@ Mobile First!
     border-radius: 5px;
     text-align: center;
     margin: 0 10px 10px 0;
+    overflow: hidden;
 }
 .small-card {
     padding: 10px;
@@ -111,10 +114,21 @@ Mobile First!
     border-radius: 5px;
     text-align: center;
     margin: 0 auto;
+    overflow: hidden;
+}
+.flex-card-half { /*full width on mobile, half on larger screens*/
+    padding: 10px;
+    background-color: white;
+    width: 100%;
+    border-radius: 5px;
+    text-align: center;
+    margin: 0 10px 10px 0;
+    overflow: hidden;
+    vertical-align: top;
 }
 
 
-
+/*tablet sized screens*/
 @media only screen and (min-width: 768px) {
     #admin-content {
         padding-left: 210px;
@@ -127,5 +141,19 @@ Mobile First!
     }
     #profile-box-name {
         width: 80%;
+    }
+
+    .flex-card-half {
+        width: 75%;
+        margin: 10px auto;
+    }
+}
+
+/*full sized monitors*/
+@media only screen and (min-width: 1200px) {
+    .flex-card-half {
+        width: 48%;
+        margin: 10px 1%;
+        display: inline-block;
     }
 }

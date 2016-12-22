@@ -47,6 +47,9 @@ class AppAdmin extends Component {
 		$('body').css('background', 'none');
 		$('#admin-portal').hide();
 		$('#loader').show();
+
+
+		//validates that user is logged in, then fetches their inital data: user, admins, organization
 		$.get('/api/validateAuth', (user)=>{
 			if (user) {
 				$.getJSON('/api/initialData', (data)=>{
@@ -74,11 +77,25 @@ class AppAdmin extends Component {
 		let elem = document.getElementById('admin-navbar');
 		(elem.style.left === '-200px') ? elem.style.left = '0' : elem.style.left = '-200px';
 	}
+	componentDidUpdate() {
 
-	componentDidUpdate(prevProps, prevState) {
+		//handle styling for navbtns
 		$('.navbtn').removeClass('activeNavbtn')
-		//Contains the name of the page loaded --> Dashboard/Tickets/EditUsers/Tasks/Settings
-		$('#' + this.props.children.type.name).addClass('activeNavbtn')
+		var active = ''
+		switch (this.props.location.pathname.toLowerCase()) {
+			case '/dashboard': 
+				active = 'Dashboard';
+				break;
+			case '/dashboard/tickets':
+				active = 'Tickets';
+				break;
+			case '/dashboard/organization':
+				active = 'Organization';
+				break;
+		}
+		$('#' + active).addClass('activeNavbtn')
+
+
 	}
   render(){
     return (
@@ -98,8 +115,7 @@ class AppAdmin extends Component {
         		<div id="admin-navbar">
 					<Link to="/dashboard"><div className="navbtn" id="Dashboard">Dashboard</div></Link>
 					<Link to="/dashboard/tickets"><div className="navbtn" id="Tickets">Tickets</div></Link>
-					<Link to="/dashboard/editusers"><div className="navbtn" id="EditUsers">Users</div></Link>
-					<Link to="/dashboard/tasks"><div className="navbtn" id="Tasks">Tasks</div></Link>
+					<Link to="/dashboard/organization"><div className="navbtn" id="Organization">Organization</div></Link>
         		</div>
 				
 
