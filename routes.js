@@ -220,6 +220,13 @@ router.put('/api/updatepassword', function(req, res){
 		res.send();
 	})
 })
+//UPDATE: this api handles ALL organization updates -- just pass the new organization data in the body
+router.put('/api/update-organization', function(req, res){
+	Organization.findOneAndUpdate({orgName: req.body.orgName}, req.body, function(err, org){
+		if (err) throw err;
+	})
+	res.send()
+})
 
 
 

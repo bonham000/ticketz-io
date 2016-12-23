@@ -18,9 +18,18 @@ class AppAdmin extends Component {
   	}
 	handleAddSite(e){
 		e.preventDefault()
-		var sites = this.state.organization.sites
-		sites.push(document.getElementById('site-input').value)
-		this.setState({organization[sites]: sites})
+		let org = this.state.organization
+		let el = document.getElementById('site-input')
+		org.sites.push(el.value)
+		el.value = '';
+		$.ajax({
+			method: 'put',
+			url: '/api/update-organization',
+			contentType: 'application/json',
+			data: JSON.stringify(org),
+			success: (res)=>{console.log('success!')}
+		})
+		this.setState({organization: org})
 	}
   	updateAdmins(data){
 		let updatedAdmins = this.state.admins;
