@@ -14,3 +14,20 @@
 .round-blue-btn:hover {
 	box-shadow: 0 1px 5px rgba(0,0,0,.18), 0 1px 10px rgba(0,0,0,.36);
 }
+.org-user-box {
+	width: 48%;
+	display: inline-block;
+	margin: 0 1% 10px 1%;
+	padding: 5px;
+	transition: background-color .3s;
+	border-radius: 5px;
+}
+.org-user-box:hover {
+	background-color: #ddd;
+	cursor: pointer;
+}
+.org-user-box-text {
+	display: inline-block;
+	font-size: 11px;
+	font-family: tahoma;
+}

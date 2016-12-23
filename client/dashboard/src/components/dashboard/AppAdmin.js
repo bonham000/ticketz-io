@@ -26,8 +26,18 @@ class AppAdmin extends Component {
 			method: 'put',
 			url: '/api/update-organization',
 			contentType: 'application/json',
-			data: JSON.stringify(org),
-			success: (res)=>{console.log('success!')}
+			data: JSON.stringify(org)
+		})
+		this.setState({organization: org})
+	}
+	handleDeleteSite(e){
+		let org = this.state.organization;
+		org.sites.splice(org.sites.indexOf(e.target.id), 1)
+		$.ajax({
+			method: 'put',
+			url: '/api/update-organization',
+			contentType: 'application/json',
+			data: JSON.stringify(org)
 		})
 		this.setState({organization: org})
 	}
@@ -68,7 +78,8 @@ class AppAdmin extends Component {
 		$.get('/api/validateAuth', (user)=>{
 			if (user) {
 				$.getJSON('/api/initialData', (data)=>{
-					this.setState({admins: data.admins, user: user, organization: data.organization});
+  					let initials = user.name[0] + user.name[user.name.indexOf(' ') + 1]
+					this.setState({admins: data.admins, user: user, organization: data.organization, initials: initials});
 					$('#admin-portal').show();
 					$('#loader').hide();
 				})
@@ -108,7 +119,7 @@ class AppAdmin extends Component {
 				active = 'Organization';
 				break;
 		}
-		$('#' + active).addClass('activeNavbtn')
+		if (active) $('#' + active).addClass('activeNavbtn')
 
 
 	}
@@ -122,9 +133,15 @@ class AppAdmin extends Component {
 				
 				<div id="profile-box">
 					<div id="menu-btn-box" className="prof-box-btn" onClick={this.animateNavbar}><i className="fa fa-bars" /></div>
-					<div id="profile-box-name"><Link to="/dashboard">{this.state.user.name}</Link></div>
-					<div className="prof-box-btn"><Link to="/dashboard/settings"><i className="fa fa-cogs" /></Link></div>
-					<div className="prof-box-btn" onClick={()=>this.handleLogout()}><i className="fa fa-lock" /></div>
+					<div id="avatar-circle-box"><Link to="/dashboard/settings"><div className="avatar-circle">{this.state.initials}</div></Link></div>
+					<div id="profile-box-name"><Link to="/dashboard/settings">{this.state.user.name}</Link></div>
+					<div className="prof-box-btn">
+						<Link to="/">
+							<i className="fa fa-external-link-square" />
+							<i className="hide-mobile"> Home</i>
+						</Link>
+					</div>
+					<div className="prof-box-btn" onClick={()=>this.handleLogout()}><i className="fa fa-lock" /><i className="hide-mobile"> Logout</i></div>
 				</div>
 				
         		<div id="admin-navbar">
@@ -142,7 +159,9 @@ class AppAdmin extends Component {
 							{admins: this.state.admins,
 								user: this.state.user,
 								organization: this.state.organization,
+								initials: this.state.initials,
 								handleAddSite: (e)=>this.handleAddSite(e),
+								handleDeleteSite: (e)=>this.handleDeleteSite(e),
 								updateAdmins: (data)=>this.updateAdmins(data),
 								createAdmin: (data)=>this.createAdmin(data),
 								deleteAdmin: (data)=>this.deleteAdmin(data)

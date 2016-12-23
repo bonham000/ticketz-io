@@ -63,10 +63,10 @@ router.post('/api/createorg', function(req, res){
 router.get('/api/organizations', function(req, res) {
 	Organization.find({}, function(err, docs) {
 		if (!err) {
-			let urls = docs.reduce((orgs, org) => {
+			var urls = docs.reduce((orgs, org) => {
 				return (orgs.indexOf(org.url) === -1) ? orgs.concat(org.url) : orgs;
 			}, []);
-			let organizations = docs.reduce((orgs, org) => {
+			var organizations = docs.reduce((orgs, org) => {
 				return (orgs.indexOf(org.orgName) === -1) ? orgs.concat(org.orgName) : orgs;
 			}, []);
 			res.status(201).send({ urls, organizations });
@@ -81,7 +81,7 @@ router.post('/api/new-ticket/:organization', function(req, response){
 	var password = req.body.password;
 	Organization.find({url: url}, function(err, org) {
 		if (err) throw err;
-		let hash = org[0].orgPassword;
+		var hash = org[0].orgPassword;
 		bcrypt.compare(password, hash, function(err, res) {
 			if (!res) {
 				response.status(400).send('Password is invalid');
@@ -233,7 +233,7 @@ router.put('/api/updatepassword', function(req, res){
 })
 //UPDATE: this api handles ALL organization updates -- just pass the new organization data in the body
 router.put('/api/update-organization', function(req, res){
-	Organization.findOneAndUpdate({orgName: req.body.orgName}, req.body, function(err, org){
+	Organization.findOneAndUpdate({url: req.body.url}, req.body, function(err, org){
 		if (err) throw err;
 	})
 	res.send()
