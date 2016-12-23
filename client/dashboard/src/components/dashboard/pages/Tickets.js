@@ -17,12 +17,16 @@ class Tickets extends Component {
 	}
 	loadActive(){
 		$.post('/api/querytickets', {status: "New"}, (tickets)=>{
-			this.setState({tickets: tickets, loading: <div />})
+			var loading = "No tickets to display."
+			if (tickets.length) loading = <div />
+			this.setState({tickets: tickets, loading: loading})
 		})
 	}
 	loadArchive(){
 		$.post('/api/querytickets', {status: "Complete"}, (tickets)=>{
-			this.setState({tickets: tickets, loading: <div />})
+			var loading = "No tickets to display."
+			if (tickets.length) loading = <div />
+			this.setState({tickets: tickets, loading: loading})
 		})
 	}
 	advancedSearch(){
@@ -39,7 +43,9 @@ class Tickets extends Component {
 			loading: <div id="loader-sm" />
 		})
 		$.post('/api/querytickets', query, (tickets)=>{
-			this.setState({tickets: tickets, loading: <div />})
+			var loading = "No tickets to display."
+			if (tickets.length) loading = <div />
+			this.setState({tickets: tickets, loading: loading})
 		})
 	}
 	

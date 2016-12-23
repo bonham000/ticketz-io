@@ -4,7 +4,7 @@ import '../css/Organization.css';
 
 class Organization extends Component {
 	handleAddUserClick(){
-		console.log('Im being handled')
+		document.getElementById('popup').style.display = "block"
 	}
 
     render(){
@@ -14,6 +14,7 @@ class Organization extends Component {
 
     	return(
     		<div>
+
 				<div className="flex-card-half">
 					<h3>General</h3>
 					<div className="card-divider" />
