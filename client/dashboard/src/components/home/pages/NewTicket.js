@@ -92,8 +92,8 @@ export default class NewTicket extends React.Component {
 			let data = Object.assign({}, this.state);
 			delete data.success;
 		  delete data.complete;
-			delete data.emailError;
-			axios.post('/api/new-ticket', data).then(response => {
+			delete data.errors;
+			axios.post(`/api/new-ticket/${this.props.params.organization}`, data).then(response => {
 				console.log('success');
 				this.setState({ success: true });
 			}).catch(err => console.error(err));
@@ -105,7 +105,7 @@ export default class NewTicket extends React.Component {
 			<div>
 				{this.state.success ? <h1>Submission Success!</h1> :
 					<div className="new-ticket">
-						<h1 className="newTicketTitle">New Ticket Page for {this.props.params.organization}</h1>
+						<h1 className="newTicketTitle">Submit a New Ticket</h1>
 						<form onSubmit={this.submitTicket} className="form-group">
 
 							<div className={classnames("form-group", { 'has-error': errors.name, 'has-success': complete.name })}>

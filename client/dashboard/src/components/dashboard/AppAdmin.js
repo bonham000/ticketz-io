@@ -7,15 +7,15 @@ import $ from 'jquery';
 //to access the admins from any child component
 //this.props.admins[0].username
 class AppAdmin extends Component {
-  	constructor(){
-    	super();
-    	this.state = {
-    		user: {},
-	    	admins: [],
-    		organization: {},
-    		showNav: true
-    	};
-  	}
+	constructor(){
+  	super();
+  	this.state = {
+  		user: {},
+    	admins: [],
+  		organization: {},
+  		showNav: true
+  	};
+	}
 	handleAddSite(e){
 		e.preventDefault()
 		let org = this.state.organization

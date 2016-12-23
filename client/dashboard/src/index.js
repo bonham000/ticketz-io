@@ -26,12 +26,9 @@ import PageNotFound from './components/dashboard/pages/PageNotFound';
 let redirect =(path) => browserHistory.push(path);
 
 function checkTicket(nextState, replace, redirect) {
-	let requestedOrganization = nextState.params.organization.toLowerCase();
+	let requestedOrganization = nextState.params.organization.toLowerCase().replace(/\s/g, '-');
 	axios.get('/api/organizations').then(response => {
-		let organizations = response.data.reduce((orgs, org) => {
-			return (orgs.indexOf(org.orgName) === -1) ? orgs.concat(org.orgName.toLowerCase()) : orgs;
-		}, []);
-		if (organizations.indexOf(requestedOrganization) === -1) {
+		if (response.data.urls.indexOf(requestedOrganization) === -1) {
 			replace('/new-ticket');
 			redirect('/new-ticket');
 		} else {

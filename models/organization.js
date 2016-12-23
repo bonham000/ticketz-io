@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var bcrypt = require('bcryptjs');
 
 var organizationSchema = new Schema({
 	ownerName: String,
@@ -12,8 +13,9 @@ var organizationSchema = new Schema({
 });
 
 organizationSchema.pre('save', function(next){
-	this.url = '/' + this.orgName.toLowerCase().replace(/\W/g, '-');
-    next();
+	this.orgPassword = bcrypt.hashSync(this.orgPassword, 10);
+	this.url = this.orgName.toLowerCase().replace(/\W/g, '-');
+  next();
 })
 
 var Organization = mongoose.model('Organization', organizationSchema);

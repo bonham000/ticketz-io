@@ -1,6 +1,6 @@
 var path = require('path');
 var moment = require('moment');
-
+var bcrypt = require('bcryptjs');
 var express = require("express");
 var router = express.Router();
 
@@ -38,9 +38,10 @@ router.post('/api/createorg', function(req, res){
 	orgdata.date = moment().format('MMMM DD YYYY, h:mm a');
 
 	var neworg = new Organization(orgdata)
+	console.log(neworg);
 	neworg.save(function(err){
 		if (err) throw err;
-		console.log(req.body.domain + ' is registering an account...')
+		console.log(req.body.ownerName + ' is registering an account...')
 
 		var userdata = {
 			name: req.body.ownerName,
@@ -62,41 +63,51 @@ router.post('/api/createorg', function(req, res){
 router.get('/api/organizations', function(req, res) {
 	Organization.find({}, function(err, docs) {
 		if (!err) {
-			console.log(docs);
-			res.status(201).send(docs);
+			let urls = docs.reduce((orgs, org) => {
+				return (orgs.indexOf(org.url) === -1) ? orgs.concat(org.url) : orgs;
+			}, []);
+			let organizations = docs.reduce((orgs, org) => {
+				return (orgs.indexOf(org.orgName) === -1) ? orgs.concat(org.orgName) : orgs;
+			}, []);
+			res.status(201).send({ urls, organizations });
 		};
 	});
 });
 
 
-//CREATE: New ticket is submitted
-router.post('/api/new-ticket', function(req, res){
-	var ticket = req.body;
-	var password = ticket.password;
-	console.log(password);
-	// verify organization password here
-	// successful, submit new ticket and send status 200 to client
-	delete ticket.password;
-	ticket.status = "New";
-	ticket.assignedto = '';
-	ticket.note = '';
-	ticket.date = moment().format('MMMM DD YYYY, h:mm a');
-	ticket._id = _idcount;
-	_idcount ++;
+// api for submitting a new ticket
+router.post('/api/new-ticket/:organization', function(req, response){
+	var url = req.params.organization;
+	var password = req.body.password;
+	Organization.find({url: url}, function(err, org) {
+		if (err) throw err;
+		let hash = org[0].orgPassword;
+		bcrypt.compare(password, hash, function(err, res) {
+			if (!res) {
+				response.status(400).send('Password is invalid');
+			} else {
 
-	console.log(ticket);
+				var ticket = req.body;
+				delete ticket.password;
+				ticket.status = "New";
+				ticket.assignedto = '';
+				ticket.note = '';
+				ticket.date = moment().format('MMMM DD YYYY, h:mm a');
+				ticket._id = _idcount;
+				ticket.organization = url;
+				_idcount++;
 
-	res.send(200);
-	
-	// var newticket = new Ticket(ticket);
-	// newticket.save(function(err){
-	// 	if (err) throw err;
-	// 	console.log(req.body.name + ' has just submitted a ticket!');
-	// 	res.end();
-	// });
+				var newticket = new Ticket(ticket);
+				console.log('New Ticker: ', newticket);
+				newticket.save(function(err){
+					if (err) throw err;
+					console.log(req.body.name + ' has just submitted a ticket!');
+				});
 
-	// if password is not valid, return unauthorized message, this
-	// will need to be handled in the new ticket component
+				response.send(200);
+			}
+		});
+	});
 
 });
 
