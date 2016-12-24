@@ -4,7 +4,19 @@ import '../css/Organization.css';
 
 class Organization extends Component {
 	handleAddUserClick(){
-		document.getElementById('popup').style.display = "block"
+		$('#add-user-popup').fadeIn(140)
+	}
+	handleCancelUserClick(){
+		$('.popup').fadeOut(140)
+	}
+	submitNewUser(){
+		let data = {
+			name: document.getElementById('create-name').value,
+			username: document.getElementById('create-email').value,
+			password: document.getElementById('create-password').value,
+			role: document.getElementById('create-role').value
+		}
+		$.post('/api/createadmin', data, function(res){console.log(res)})
 	}
 
     render(){
@@ -13,7 +25,22 @@ class Organization extends Component {
     	console.log(this.props.admins)
 
     	return(
-    		<div>
+    		<div className="masonry">
+    			<div className="popup" id="add-user-popup">
+					<h4>Add User</h4>
+					<div className="card-divider" />
+					<input type="text" id="create-name" className="hm-input form-control" placeholder="Name" />
+					<input type="text" id="create-email" className="hm-input form-control" placeholder="Email" />
+					<input type="password" id="create-password" className="hm-input form-control" placeholder="Password" />
+					<select id="create-role" className="hm-input form-control">
+						<option>technician</option>
+						<option>manager</option>
+					</select>
+					<div className="card-footer">
+						<div className="card-link" onClick={this.handleCancelUserClick}>Cancel</div>
+						<div className="card-link" onClick={this.submitNewUser}>Submit</div>
+					</div>
+    			</div>
 
 				<div className="flex-card-half">
 					<h3>General</h3>
@@ -40,10 +67,12 @@ class Organization extends Component {
 					{this.props.organization.sites &&
 						this.props.organization.sites.map((site, i)=>{
 						return <div key={i}>
-							<i 	className="fa fa-times-circle"
+							{editMode &&
+								<i 	className="fa fa-times-circle"
 								id={site}
 								style={{color: "red", cursor: "pointer"}}
-								onClick={(e)=>{this.props.handleDeleteSite(e)}}/> {site}
+								onClick={(e)=>{this.props.handleDeleteSite(e)}}/>}
+								&emsp;{site}
 							</div>
 					})}
 					{editMode &&

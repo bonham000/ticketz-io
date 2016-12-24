@@ -13,7 +13,6 @@ input {
 
 body {
     height: 100%;
-    background-color: mintcream;
 }
 
 /*inputs / forms */
@@ -51,7 +50,6 @@ body {
     min-height: 100vh;
     height: 100%;
     margin: 0 auto;
-    background-color: mintcream;
 }
 .form-container {
     width: 250px;

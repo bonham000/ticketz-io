@@ -1,3 +1,36 @@
+
+.popup {
+    width: 280px;
+    background-color: white;
+    border-radius: 10px;
+    border: 3px double #fa7252;
+    position: fixed;
+    top: 50%;
+    margin-top: -200px;
+    z-index: 9;
+    left: 50%;
+    margin-left: -140px;
+    display: none;
+    padding: 20px;
+    box-shadow: 0 3px 6px rgba(0,0,0,.14), 0 3px 12px rgba(0,0,0,.28);
+}
+.card-link {
+    cursor: pointer;
+    color: #6dcab7;
+    margin-left: 15px;
+
+}
+.card-link:hover {
+    color: #7cd5ba;
+}
+.card-footer {
+    width: 100%;
+    margin: 30px 0 -10px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+
 /*
 Mobile First!
 */
@@ -164,7 +197,10 @@ Mobile First!
         font-size: 22px;
     }
     #profile-box-name {
-        font-size: 14px;
+        display: none;
+    }
+    #profile-box {
+        justify-content: space-between;
     }
 }
 /*tablet sized screens*/
@@ -180,19 +216,25 @@ Mobile First!
     }
     #profile-box-name {
         width: 80%;
+        font-size: 14px;
     }
 
     .flex-card-half {
         width: 75%;
         margin: 10px auto;
     }
+    .popup {
+        margin-left: -40px;
+    }
 }
 
 /*full sized monitors*/
 @media only screen and (min-width: 1200px) {
+    .masonry {
+        column-count: 2;
+    }
     .flex-card-half {
-        width: 48%;
-        margin: 10px 1%;
+        width: 100%;
         display: inline-block;
     }
 }
