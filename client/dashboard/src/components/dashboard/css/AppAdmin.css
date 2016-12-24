@@ -92,6 +92,7 @@ Mobile First!
     height: 80px;
     animation: spin 2s linear infinite;
     margin: 25vh auto;
+    z-index: 10;
 }
 #loader-sm {
     border: 6px solid #e9f0f5;
@@ -101,6 +102,14 @@ Mobile First!
     height: 30px;
     animation: spin 2s linear infinite;
     margin: 0 auto;
+}
+.loader-logo {
+    position: absolute;
+    border-radius: 50%;
+    width: 80px;padding: 8px;
+    top: 25vh; left: 50%;
+    margin-left: -40px;
+    z-index: -1;
 }
 @keyframes spin {
     0% { transform: rotate(0deg); }

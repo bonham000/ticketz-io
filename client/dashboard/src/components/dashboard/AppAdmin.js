@@ -128,6 +128,7 @@ class AppAdmin extends Component {
     	<div>
 
     		<div id="loader"></div>
+    		<img src="/images/logo-test.jpg" className="loader-logo"/>
 
       		<div id="admin-portal">
 				

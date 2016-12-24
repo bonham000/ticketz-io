@@ -16,6 +16,9 @@ body {
 }
 
 /*inputs / forms */
+.hm-logo {
+    height: 50px;
+}
 .hm-input {
     width: 90%;
     border-radius: 5px;
