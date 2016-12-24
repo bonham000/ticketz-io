@@ -10,13 +10,37 @@ class Organization extends Component {
 		$('.popup').fadeOut(140)
 	}
 	submitNewUser(){
-		let data = {
-			name: document.getElementById('create-name').value,
-			username: document.getElementById('create-email').value,
-			password: document.getElementById('create-password').value,
-			role: document.getElementById('create-role').value
+		function p(id) {return document.getElementById(id)}
+		const fields = ['create-name', 'create-email', 'create-password', 'create-role']
+		let valid = true
+		for (var i in fields) {
+			if (!p(fields[i]).value) {
+				p(fields[i]).style.border = "1px solid red"
+				valid = false
+			} else {
+				p(fields[i]).style.border = "1px solid black"
+			}
 		}
-		$.post('/api/createadmin', data, function(res){console.log(res)})
+		if (valid) {
+			let data = {
+				name: document.getElementById('create-name').value,
+				username: document.getElementById('create-email').value,
+				password: document.getElementById('create-password').value,
+				role: document.getElementById('create-role').value,
+				organization: this.props.organization.orgName
+			}
+			$.ajax({
+				method: 'post',
+				contentType: 'application/json',
+				url: '/api/createadmin',
+				data: JSON.stringify(data),
+				success: (res)=>{
+					$('.popup').fadeOut(140)
+					this.props.createAdmin(data)
+				},
+				failure: (res)=>{console.log(res)}
+			})
+		}
 	}
 
     render(){
@@ -38,7 +62,7 @@ class Organization extends Component {
 					</select>
 					<div className="card-footer">
 						<div className="card-link" onClick={this.handleCancelUserClick}>Cancel</div>
-						<div className="card-link" onClick={this.submitNewUser}>Submit</div>
+						<div className="card-link" onClick={()=>this.submitNewUser()}>Submit</div>
 					</div>
     			</div>
 
@@ -50,7 +74,7 @@ class Organization extends Component {
 						<br />
 						<b>Joined: </b>{o.date}
 						<br />
-						<b>URL: </b> {'ticketz.io/new-ticket' + o.url}
+						<b>URL: </b> {'ticketz.io/' + o.url}
 						<br />
 						<b>Submittal Password: </b> {o.orgPassword}
 					</div>

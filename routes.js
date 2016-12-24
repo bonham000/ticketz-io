@@ -113,8 +113,10 @@ router.post('/api/new-ticket/:organization', function(req, response){
 
 //CREATE: makes a new admin account
 router.post('/api/createadmin', function(req, res){
+	console.log('body: ' + req.body)
 		User.findOne({username: req.body.username.toLowerCase()}, function (err, user) {
 			if (err) throw err;
+			console.log('user: ' + user)
 			if (user) res.status(500).send('Username already exists.');
 			else {
 				var newuser = new User(req.body);
