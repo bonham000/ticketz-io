@@ -13,6 +13,7 @@ class Organization extends Component {
 		function p(id) {return document.getElementById(id)}
 		const fields = ['create-name', 'create-email', 'create-password', 'create-role']
 		let valid = true
+		const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 		for (var i in fields) {
 			if (!p(fields[i]).value) {
 				p(fields[i]).style.border = "1px solid red"
@@ -20,6 +21,10 @@ class Organization extends Component {
 			} else {
 				p(fields[i]).style.border = "1px solid black"
 			}
+		}
+		if (!p('create-email').value.match(emailRegex)) {
+			valid = false
+			p('create-email').style.border = "1px solid red"
 		}
 		if (valid) {
 			let data = {
