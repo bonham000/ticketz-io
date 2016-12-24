@@ -9,7 +9,7 @@ class App extends Component {
     			<div id="hm-navbar">
             		<Link to="/"><div className="hm-btn" id="hm-home-btn"><i className="fa fa-home" /></div></Link>
                     <button className="hm-btn" id="hm-track-ticket-btn">Track Ticket</button>
-                    <Link to="/new-ticket" className="hm-btn" id="hm-new-ticket-btn">New Ticket</Link>
+                    <Link to="/new" className="hm-btn" id="hm-new-ticket-btn">New Ticket</Link>
             		<Link to="/dashboard"><div className="hm-btn" id="hm-dashboard-btn"><i className="fa fa-external-link-square" /> Dashboard</div></Link>
     			</div>
     			<div className="hm-container">

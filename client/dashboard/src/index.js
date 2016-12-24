@@ -29,8 +29,8 @@ function checkTicket(nextState, replace, redirect) {
 	let requestedOrganization = nextState.params.organization.toLowerCase().replace(/\s/g, '-');
 	axios.get('/api/organizations').then(response => {
 		if (response.data.urls.indexOf(requestedOrganization) === -1) {
-			replace('/new-ticket');
-			redirect('/new-ticket');
+			replace('/new');
+			redirect('/new');
 		} else {
 			redirect(nextState);
 		}
@@ -44,8 +44,8 @@ class Index extends Component {
 			<Router history={browserHistory}>
 				<Route path="/" component={App}>
 					<IndexRoute component={Home} />
-					<Route path="/new-ticket" component={FindOrganization} />
-					<Route path="/new-ticket/:organization" component={NewTicket} onEnter={checkTicket} />
+					<Route path="/new" component={FindOrganization} />
+					<Route path="/new/:organization" component={NewTicket} onEnter={checkTicket} />
 					<Route path="/login" component={Login} />
 					<Route path="/signup" component={Signup} />
 				</Route>

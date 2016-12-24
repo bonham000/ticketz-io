@@ -28,7 +28,7 @@ export default class NewTicketSearch extends React.Component {
 		event.preventDefault();
 		let { input, organizations } = this.state;
 		if (organizations.indexOf(input) !== -1) {
-			browserHistory.push(`/new-ticket/${input}`);
+			browserHistory.push(`/new/${input}`);
 		} else {
 			this.setState({
 				error: true
