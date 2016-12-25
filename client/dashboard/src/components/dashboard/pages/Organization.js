@@ -79,7 +79,7 @@ class Organization extends Component {
 						<br />
 						<b>Joined: </b>{o.date}
 						<br />
-						<b>URL: </b> {'ticketz.io/' + o.url}
+						<b>URL: </b> <a href={'http://ticketz.io/new/' + o.url} target="_blank" style={{color: "#66B"}}>{'http://ticketz.io/new/' + o.url}</a>
 						<br />
 						<b>Submittal Password: </b> {o.orgPassword}
 					</div>

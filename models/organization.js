@@ -13,7 +13,6 @@ var organizationSchema = new Schema({
 });
 
 organizationSchema.pre('save', function(next){
-	this.orgPassword = bcrypt.hashSync(this.orgPassword, 10);
 	this.url = this.orgName.toLowerCase().replace(/\W/g, '-');
   next();
 })
