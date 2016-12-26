@@ -182,9 +182,15 @@ router.post('/api/querytickets', function(req, res){
 		if (err) throw err;
 		res.send(tickets);
 	})
-})
+});
 
-
+router.post('/api/organization-sites', function(req, res) {
+	Organization.find({ url: req.body.org }, function(err, docs) {
+		if (!err) {
+			res.send({sites: docs[0].sites});
+		};
+	});
+});
 
 //UPDATE: updates assignee
 router.get('/api/updateassignee/:id/:assignee', function(req, res){

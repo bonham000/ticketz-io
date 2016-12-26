@@ -73,12 +73,11 @@ class AppAdmin extends Component {
 		$('#admin-portal').hide();
 		$('#loader').show();
 
-
 		//validates that user is logged in, then fetches their inital data: user, admins, organization
 		$.get('/api/validateAuth', (user)=>{
 			if (user) {
 				$.getJSON('/api/initialData', (data)=>{
-  					let initials = user.name[0] + user.name[user.name.indexOf(' ') + 1]
+  				let initials = user.name[0] + user.name[user.name.indexOf(' ') + 1]
 					this.setState({admins: data.admins, user: user, organization: data.organization, initials: initials});
 					$('#admin-portal').show();
 					$('#loader').hide();
@@ -121,7 +120,6 @@ class AppAdmin extends Component {
 		}
 		if (active) $('#' + active).addClass('activeNavbtn')
 
-
 	}
   render(){
     return (
@@ -130,45 +128,43 @@ class AppAdmin extends Component {
     		<div id="loader"></div>
     		<img src="/images/logo-test.jpg" className="loader-logo"/>
 
-      		<div id="admin-portal">
+      	<div id="admin-portal">
 				
-				<div id="profile-box">
-					<div id="menu-btn-box" className="prof-box-btn" onClick={this.animateNavbar}><i className="fa fa-bars" /></div>
-					<div id="avatar-circle-box"><Link to="/dashboard/settings"><div className="avatar-circle">{this.state.initials}</div></Link></div>
-					<div id="profile-box-name"><Link to="/dashboard/settings">{this.state.user.name}</Link></div>
-					<div className="prof-box-btn">
-						<Link to="/">
-							<i className="fa fa-external-link-square" />
-							<i className="hide-mobile"> Home</i>
-						</Link>
+					<div id="profile-box">
+						<div id="menu-btn-box" className="prof-box-btn" onClick={this.animateNavbar}><i className="fa fa-bars" /></div>
+						<div id="avatar-circle-box"><Link to="/dashboard/settings"><div className="avatar-circle">{this.state.initials}</div></Link></div>
+						<div id="profile-box-name"><Link to="/dashboard/settings">{this.state.user.name}</Link></div>
+						<div className="prof-box-btn">
+							<Link to="/">
+								<i className="fa fa-external-link-square" />
+								<i className="hide-mobile"> Home</i>
+							</Link>
+						</div>
+						<div className="prof-box-btn" onClick={()=>this.handleLogout()}><i className="fa fa-lock" /><i className="hide-mobile"> Logout</i></div>
 					</div>
-					<div className="prof-box-btn" onClick={()=>this.handleLogout()}><i className="fa fa-lock" /><i className="hide-mobile"> Logout</i></div>
-				</div>
-				
-        		<div id="admin-navbar">
-					<Link to="/dashboard"><div className="navbtn" id="Dashboard">Dashboard</div></Link>
-					<Link to="/dashboard/tickets"><div className="navbtn" id="Tickets">Tickets</div></Link>
-					<Link to="/dashboard/organization"><div className="navbtn" id="Organization">Organization</div></Link>
-        		</div>
-				
+			
+	    		<div id="admin-navbar">
+						<Link to="/dashboard"><div className="navbtn" id="Dashboard">Dashboard</div></Link>
+						<Link to="/dashboard/tickets"><div className="navbtn" id="Tickets">Tickets</div></Link>
+						<Link to="/dashboard/organization"><div className="navbtn" id="Organization">Organization</div></Link>
+	    		</div>
 
-
-        		<div id="admin-content">
-					{this.props.children &&
-						React.cloneElement(
-							this.props.children,
-							{admins: this.state.admins,
-								user: this.state.user,
-								organization: this.state.organization,
-								initials: this.state.initials,
-								handleAddSite: (e)=>this.handleAddSite(e),
-								handleDeleteSite: (e)=>this.handleDeleteSite(e),
-								updateAdmins: (data)=>this.updateAdmins(data),
-								createAdmin: (data)=>this.createAdmin(data),
-								deleteAdmin: (data)=>this.deleteAdmin(data)
-							}
+	    		<div id="admin-content">
+						{this.props.children &&
+							React.cloneElement(
+								this.props.children,
+								{admins: this.state.admins,
+									user: this.state.user,
+									organization: this.state.organization,
+									initials: this.state.initials,
+									handleAddSite: (e)=>this.handleAddSite(e),
+									handleDeleteSite: (e)=>this.handleDeleteSite(e),
+									updateAdmins: (data)=>this.updateAdmins(data),
+									createAdmin: (data)=>this.createAdmin(data),
+									deleteAdmin: (data)=>this.deleteAdmin(data)
+								}
 						)}
-        	</div>
+	    		</div>
 
       	</div>
       </div>
