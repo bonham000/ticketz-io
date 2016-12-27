@@ -72,7 +72,6 @@ class AppAdmin extends Component {
 		$('body').css('background', 'none');
 		$('#admin-portal').hide();
 		$('#loader').show();
-
 		//validates that user is logged in, then fetches their inital data: user, admins, organization
 		$.get('/api/validateAuth', (user)=>{
 			if (user) {
@@ -84,7 +83,7 @@ class AppAdmin extends Component {
 				})
 			}
 			else window.location.href = '/login';
-		})
+		});
 	}
 	componentWillUnmount(){
 		window.removeEventListener('resize', this.handleResize);

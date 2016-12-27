@@ -124,8 +124,6 @@ router.post('/api/createadmin', function(req, res){
 });
 
 
-
-
 //READ: User checks the status on their tickets
 router.get('/api/check/:email', function(req, res){
 	console.log(req.params.email + " requested info on their current work orders");
@@ -171,9 +169,12 @@ router.get('/api/initialData', function(req, res){
 //Just make a POST request, with a JSON object of your search params!
 router.post('/api/querytickets', function(req, res){
 	let { organization } = req.user;
-	console.log(req.body);
-	Ticket.find(organization).sort({date: -1}).exec(function(err, tickets) {
+	Ticket.find(organization, function(err, tickets) {
+		let assignee = req.user.username;
 		tickets = tickets.filter(ticket => ticket.status == req.body.status);
+		if (req.body.assigned) {
+			tickets = tickets.filter(ticket => ticket.assignedto === assignee);
+		};
 		if (err) throw err;
 		res.send(tickets);
 	})
