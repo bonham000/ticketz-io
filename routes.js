@@ -81,34 +81,29 @@ router.post('/api/new-ticket/:organization', function(req, response){
 	var password = req.body.password;
 	Organization.find({url: url}, function(err, org) {
 		if (err) throw err;
-		var hash = org[0].orgPassword;
-		bcrypt.compare(password, hash, function(err, res) {
-			if (!res) {
-				response.status(400).send('Password is invalid');
-			} else {
+		if (password === org[0].orgPassword) {
+			var ticket = req.body;
+			delete ticket.password;
+			ticket.status = "New";
+			ticket.assignedto = '';
+			ticket.note = '';
+			ticket.date = moment().format('MMMM DD YYYY, h:mm a');
+			ticket._id = _idcount;
+			ticket.organization = url;
+			_idcount++;
 
-				var ticket = req.body;
-				delete ticket.password;
-				ticket.status = "New";
-				ticket.assignedto = '';
-				ticket.note = '';
-				ticket.date = moment().format('MMMM DD YYYY, h:mm a');
-				ticket._id = _idcount;
-				ticket.organization = url;
-				_idcount++;
+			var newticket = new Ticket(ticket);
+			console.log('New Ticker: ', newticket);
+			newticket.save(function(err){
+				if (err) throw err;
+				console.log(req.body.name + ' has just submitted a ticket!');
+			});
 
-				var newticket = new Ticket(ticket);
-				console.log('New Ticker: ', newticket);
-				newticket.save(function(err){
-					if (err) throw err;
-					console.log(req.body.name + ' has just submitted a ticket!');
-				});
-
-				response.send(200);
-			}
-		});
+			response.send(200);
+		} else {
+			response.status(400).send('Password is invalid');
+		}
 	});
-
 });
 
 //CREATE: makes a new admin account
@@ -175,16 +170,22 @@ router.get('/api/initialData', function(req, res){
 //Handles all the advanced search functionality.
 //Just make a POST request, with a JSON object of your search params!
 router.post('/api/querytickets', function(req, res){
-	console.log(req.user);
-	if (req.body.description) req.body.description = new RegExp(req.body.description, "i")
-	req.body.organization = req.user.organization
-	Ticket.find(req.body).sort({date: -1}).exec(function(err, tickets){
+	let { organization } = req.user;
+	console.log(req.body);
+	Ticket.find(organization).sort({date: -1}).exec(function(err, tickets) {
+		tickets = tickets.filter(ticket => ticket.status == req.body.status);
 		if (err) throw err;
 		res.send(tickets);
 	})
-})
+});
 
-
+router.post('/api/organization-sites', function(req, res) {
+	Organization.find({ url: req.body.org }, function(err, docs) {
+		if (!err) {
+			res.send({sites: docs[0].sites});
+		};
+	});
+});
 
 //UPDATE: updates assignee
 router.get('/api/updateassignee/:id/:assignee', function(req, res){

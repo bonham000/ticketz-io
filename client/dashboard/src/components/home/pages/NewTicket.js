@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import classnames from 'classnames';
 import validator from 'email-validator';
+import $ from 'jquery';
 
 import '../css/Ticket-Submission.css';
 
@@ -16,10 +17,17 @@ export default class NewTicket extends React.Component {
 			email: '',
 			phone: '',
 			select: 'default',
+			sites: [],
 			room: '',
 			description: '',
 			password: ''
 		}
+	}
+	componentDidMount() {
+		axios.post('/api/organization-sites', {org: this.props.params.organization}).then(response => {
+			let sites = (response.data.sites.length > 0) ? response.data.sites : ['Default Site'];
+			this.setState({ sites });
+		}).catch(err => console.log(err));
 	}
 	validateEmail = () => {
 		if (!validator.validate(this.state.email)) {
@@ -74,6 +82,20 @@ export default class NewTicket extends React.Component {
 			complete
 		});
 	}
+	reset = () => {
+		this.setState({
+			success: false,
+			complete: {},
+			errors: {},
+			name: '',
+			email: '',
+			phone: '',
+			select: 'default',
+			room: '',
+			description: '',
+			password: ''
+		});
+	}
 	submitTicket = (event) => {
 		event.preventDefault();
 		let { errors, complete } = this.state;
@@ -94,16 +116,23 @@ export default class NewTicket extends React.Component {
 		  delete data.complete;
 			delete data.errors;
 			axios.post(`/api/new-ticket/${this.props.params.organization}`, data).then(response => {
-				console.log('success');
 				this.setState({ success: true });
-			}).catch(err => console.error(err));
+				$("html, body").animate({ scrollTop: 0 }, "slow");	
+			}).catch(error => {
+				errors.authorized = true;
+				this.setState({ errors });
+			});
 		}
 	}
 	render() {
 		let { complete, errors } = this.state;
 		return (
 			<div>
-				{this.state.success ? <h1>Submission Success!</h1> :
+				{this.state.success ? <div className='ticket-success'>
+					<h2 id='ticket_h2'>Your ticket was submitted successfully!</h2>
+					<h4 id='ticket_h4'>We'll get to work quickly trying to respond to your issue.</h4>
+					<button className='btn btn-primary' id='ticket_reset' onClick={this.reset}>Submit Another Ticket</button>
+				</div> :
 					<div className="new-ticket">
 						<h1 className="newTicketTitle">Submit a New Ticket</h1>
 						<form onSubmit={this.submitTicket} className="form-group">
@@ -160,7 +189,7 @@ export default class NewTicket extends React.Component {
 								<label className="ticketLabel" htmlFor="site">Your Work Site:</label>
 								<select value={this.state.select} onChange={this.handleSelect} name="siteSelecter" className="form-control site-selector">
 									<option value="default">Select Your Work Site</option>
-									<option value="site1">Site 1</option>
+									{this.state.sites.map((site, i) => <option value={site} key={i}>{site}</option> )}
 								</select>
 							</div>
 
@@ -217,6 +246,11 @@ export default class NewTicket extends React.Component {
 							{ errors.password && 
 								<div className="alert alert-danger error-message">
 		  						<strong>You must enter your organization's password.</strong>
+								</div>}
+
+							{ errors.authorized && 
+								<div className="alert alert-danger error-message">
+		  						<strong>Your password was incorrect.</strong>
 								</div>}
 
 							<button type="submit" className="btn-primary hm-btn btn-lg" id="btn-submit">Submit Ticket</button>

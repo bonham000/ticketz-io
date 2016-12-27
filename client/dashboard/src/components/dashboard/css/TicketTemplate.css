@@ -1,4 +1,4 @@
-.ticket-container:nth-child(even) {
+.ticket-wrapper:nth-child(even) {
     background-color: #b6e5db;
 }
 
@@ -7,16 +7,23 @@
     overflow: hidden;
 }
 
-.assignee {
+.c1 {
+    text-align: left;
+}
+
+.ticket-assign {
     border: 1px solid #95ed78;
-    opacity: .6;
+    font-size: 15px;
 }
-textarea {
+.ticket-notes {
     width: 100%;
-    resize: none;
     border: 1px solid #C5FdB8;
-    /*opacity: .6;*/
+    margin-left: 7px;
+    margin-right: 7px;
+    padding: 7px;
+    font-size: 18px;
 }
+
 .route-btn {
     background-color: tomato;
 }
@@ -29,7 +36,7 @@ textarea {
     width: 100px;
     padding-top: 3px;
     padding-bottom: 3px;
-    font-size: 18px;
+    font-size: 15px;
     text-align: center;
     margin: 5px auto;
     opacity: .7;
@@ -57,18 +64,24 @@ textarea {
         margin: 0 auto;
     }
 
-    .c1 {width: 20%;}
-    .c2 {width: 45%;}
+    .c1 {width: 25%;}
+    .c2 {
+        width: 60%;
+        text-align: left;
+    }
     .c3 {
-        width: 20%;
+        width: 15%;
         display: flex;
         flex-direction: column;
         justify-content: center;
     }
     .c4 {
-        width: 15%;
+        width: 85%;
+        padding: 15px 5px;
+        border-top: 1px solid rgba(5,5,5,0.5);
+        margin: 4px auto;
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         justify-content: center;
     }
 }
