@@ -11,10 +11,10 @@ class Dashboard extends Component {
 			tickets: []
 		}
 	}
-	componentWillMount(){
-		if (this.props.user.length > '') {
+	componentDidMount(){
+		if (this.props.user) {
 			let data = {status: "New", assignedto: this.props.user.username};
-			$.post('/api/querytickets', data, (tickets)=>{
+			$.post('/api/querytickets', data, (tickets) => {
 				if (tickets.length) {
 					this.setState({tickets: tickets, loading: <div />})
 				} else {

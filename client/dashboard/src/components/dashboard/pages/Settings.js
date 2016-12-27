@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import '../css/Settings.css';
 import $ from 'jquery';
 
-
 class Settings extends Component {
 	handleClick(){
 		$('.error-flash').html('<i class="fa fa-circle-o-notch fa-spin" />').css('color', 'black')
