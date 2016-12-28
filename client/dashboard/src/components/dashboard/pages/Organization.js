@@ -3,11 +3,24 @@ import $ from 'jquery';
 import '../css/Organization.css';
 
 class Organization extends Component {
+	constructor(){
+		super();
+		this.state = {
+			editUser: <div />
+		}
+	}
 	handleAddUserClick(){
 		$('#add-user-popup').fadeIn(140)
 	}
 	handleCancelUserClick(){
+		this.setState({editUser: <div />})
 		$('.popup').fadeOut(140)
+	}
+	handleEditUserClick(e){
+		$('#edit-user-popup').fadeIn(140)
+		this.setState({
+			editUser: <div></div>
+		})
 	}
 	submitNewUser(){
 		function p(id) {return document.getElementById(id)}
@@ -55,6 +68,7 @@ class Organization extends Component {
 
     	return(
     		<div className="masonry">
+    			<div className="popup" id="edit-user-popup">{this.state.editUser}</div>
     			<div className="popup" id="add-user-popup">
 					<h4>Add User</h4>
 					<div className="card-divider" />
@@ -66,7 +80,7 @@ class Organization extends Component {
 						<option>manager</option>
 					</select>
 					<div className="card-footer">
-						<div className="card-link" onClick={this.handleCancelUserClick}>Cancel</div>
+						<div className="card-link" onClick={()=>this.handleCancelUserClick()}>Cancel</div>
 						<div className="card-link" onClick={()=>this.submitNewUser()}>Submit</div>
 					</div>
     			</div>
@@ -79,7 +93,7 @@ class Organization extends Component {
 						<br />
 						<b>Joined: </b>{o.date}
 						<br />
-						<b>URL: </b> <a href={'http://ticketz.io/new/' + o.url} target="_blank" style={{color: "#66B"}}>{'http://ticketz.io/new/' + o.url}</a>
+						<b>URL: </b> <a href={'http://www.ticketz.io/new/' + o.url} target="_blank" style={{color: "#66B"}}>{'http://www.ticketz.io/new/' + o.url}</a>
 						<br />
 						<b>Submittal Password: </b> {o.orgPassword}
 					</div>
@@ -122,7 +136,7 @@ class Organization extends Component {
 					{this.props.admins &&
 						this.props.admins.map((admin, i)=>{
 							var initials = admin.name[0] + admin.name[admin.name.indexOf(' ') + 1]
-							return (<div className="org-user-box" key={i}>
+							return (<div className="org-user-box" key={i} onClick={(e)=>this.handleEditUserClick(e)}>
 								<div className="avatar-circle">{initials}</div>
 								<div className="org-user-box-text">
 									<b>{admin.name}</b><br />
