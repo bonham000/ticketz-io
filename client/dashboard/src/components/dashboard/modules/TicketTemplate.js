@@ -1,20 +1,29 @@
 import React, { Component } from 'react';
 import '../css/TicketTemplate.css';
 import $ from 'jquery';
+import axios from 'axios';
 
 class TicketTemplate extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			note: this.props.ticket.note,
+			flash: false
+		}
+	}
 	setAssignee(e){
 		$.get('/api/updateassignee/' + this.props.ticket._id + '/' + e.target.value);
 	}
-	setNote(e){
-		var data = {id: this.props.ticket._id, note: e.target.value}
-		$.ajax({
-			method: 'PUT',
-			url: '/api/updatenote/',
-			contentType: 'application/json',
-			data: JSON.stringify(data)
-		});
+	setNote = () => {
+		var data = {id: this.props.ticket._id, note: this.state.note }
+		axios.post('/api/updatenote/', data).then(res => {
+			this.setState({ flash: true });
+		}).catch(err => console.log(err));
 	}
+	handleChange = (e) => {
+		this.setState({ note: e.target.value });
+	}
+	closeFlash = () => this.setState({ flash: false })
 	route(e){
 		let newdpt = this.props.ticket.dpt === 'IT' ? 'Maintenance' : 'IT';
 		$.get('/api/routeticket/' + this.props.ticket._id + '/' + newdpt);
@@ -43,22 +52,35 @@ class TicketTemplate extends Component {
 				
 				<div className="sub-container c3">
 					<div><b>Actions:</b></div>
-					<div className="route-btn tk-btn" onClick={this.props.setDetail.bind(this, this.props.ticket._id)}>Show Details</div>
-					<div className="route-btn tk-btn" onClick={(e)=>this.route(e)}>Route</div>
-					<div className="complete-btn tk-btn" onClick={(e)=>this.complete(e)}>Complete</div>
+					<div className='btn-wrapper'>
+						<div className="route-btn tk-btn" onClick={this.props.setDetail.bind(this, this.props.ticket._id)}>Show Details</div>
+						<div className="route-btn tk-btn" onClick={(e)=>this.route(e)}>Route</div>
+						<div className="complete-btn tk-btn" onClick={(e)=>this.complete(e)}>Complete</div>
+					</div>
 				</div>
 
 			</div>
 				{this.props.showDetails && <div className="c4">
-					<select className="ticket-assign" onChange={(e)=>this.setAssignee(e)}>
-						<option style={{"display": "none"}}>{this.props.ticket.assignedto || "Assign Ticket"}</option>
-						{!this.props.admins ? '' : this.props.admins.map((admin, i)=>{
-							return <option key={i}>{admin.username}</option>
-						})
-						}
-					</select>
-					<textarea className="ticket-notes" defaultValue={this.props.ticket.note} onBlur={(e)=>this.setNote(e)} />
-					<button className="btn btn-primary" onClick={this.props.closeDetails.bind(this, this.props.ticket._id)}>Hide Details</button>
+					<div className='detail_1'>
+						<label>Assign Notes</label>
+						<textarea className="ticket-notes" value={this.state.note} onChange={this.handleChange}/>
+					</div>
+					<div className='detail_2'>
+						<label className='detail-assign'>Assign Ticket</label>
+						<select className="ticket-assign" onChange={(e)=>this.setAssignee(e)}>
+							<option style={{"display": "none"}}>{this.props.ticket.assignedto || "Assign Ticket"}</option>
+							{!this.props.admins ? '' : this.props.admins.map((admin, i)=>{
+								return <option key={i}>{admin.username}</option>
+							})
+							}
+						</select>	
+						<button className="btn btn-save-notes" onClick={this.setNote}>Save Notes</button>
+						<button className="btn btn-primary btn-detail" onClick={this.props.closeDetails.bind(this, this.props.ticket._id)}>Close Details View</button>
+					</div>
+				</div> }
+				{ this.state.flash && <div className='success-flash'>
+					<h4>Note saved!</h4>
+					<i className="fa fa-times close-notes" onClick={this.closeFlash} aria-hidden="true"></i>
 				</div> }
 			</div>
 		)

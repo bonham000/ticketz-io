@@ -195,10 +195,11 @@ router.get('/api/updateassignee/:id/:assignee', function(req, res){
 	})
 })
 //UPDATE: updates note on the ticket
-router.put('/api/updatenote/', function(req, res){
+router.post('/api/updatenote/', function(req, res){
 	Ticket.update({_id: req.body.id}, {note: req.body.note}, function(err, ticket){
 		if (err) throw err;
-	})
+		res.send(200);
+	});
 })
 //UPDATE: route a ticket to opposite dpt
 router.get('/api/routeticket/:id/:newdpt', function(req, res){
