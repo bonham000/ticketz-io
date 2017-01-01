@@ -22,7 +22,7 @@
 	transition: background-color .2s;
 	border-radius: 5px;
 }
-.org-user-box:hover {
+.org-user-box-edit-hover:hover {
 	background-color: #ddd;
 	cursor: pointer;
 }

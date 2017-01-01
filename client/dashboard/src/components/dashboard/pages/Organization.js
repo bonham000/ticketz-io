@@ -6,20 +6,28 @@ class Organization extends Component {
 	constructor(){
 		super();
 		this.state = {
-			editUser: <div />
+			editIndex: '',
+			editName: '',
+			editEmail: '',
+			editPassword: '',
+			editRole: ''
 		}
 	}
 	handleAddUserClick(){
 		$('#add-user-popup').fadeIn(140)
 	}
 	handleCancelUserClick(){
-		this.setState({editUser: <div />})
 		$('.popup').fadeOut(140)
 	}
 	handleEditUserClick(e){
 		$('#edit-user-popup').fadeIn(140)
+		let a = this.props.admins[e.target.id];
 		this.setState({
-			editUser: <div></div>
+			editIndex: e.target.id,
+			editName: a.name,
+			editEmail: a.username,
+			editPassword: '',
+			editRole: a.role
 		})
 	}
 	submitNewUser(){
@@ -32,13 +40,14 @@ class Organization extends Component {
 				p(fields[i]).style.border = "1px solid red"
 				valid = false
 			} else {
-				p(fields[i]).style.border = "1px solid black"
+				p(fields[i]).style.border = "1px solid rgba(0,0,0,.2)"
 			}
 		}
 		if (!p('create-email').value.match(emailRegex)) {
 			valid = false
 			p('create-email').style.border = "1px solid red"
 		}
+		console.log(document.getElementById('create-name').value)
 		if (valid) {
 			let data = {
 				name: document.getElementById('create-name').value,
@@ -60,15 +69,74 @@ class Organization extends Component {
 			})
 		}
 	}
-
+	changeName(e){this.setState({editName: e.target.value})}
+	changeEmail(e){this.setState({editEmail: e.target.value})}
+	changePassword(e){this.setState({editPassword: e.target.value})}
+	changeRole(e){this.setState({editRole: e.target.value})}
+	submitEditUser(){
+		let data = {
+			index: this.state.editIndex,
+			name: this.state.editName,
+			username: this.state.editEmail,
+			role: this.state.editRole
+		}
+		if (this.state.editPassword) {data.password = this.state.editPassword}
+		$.ajax({
+			method: 'put',
+			contentType: 'application/json',
+			url: '/api/editadmin',
+			data: JSON.stringify(data),
+			success: (res)=>{
+				$('.popup').fadeOut(140)
+				this.props.submitEditUser(data);
+			},
+			failure: (res)=>{console.log(res)}
+		})
+	}
+	deleteUser(){
+		let username = this.state.editEmail
+		if (this.state.editRole === "owner") {
+			alert('You cannot delete the owner')
+		} else {
+			$.ajax({
+				method: 'delete',
+				url: '/api/deleteadmin',
+				contentType: 'application/json',
+				data: JSON.stringify({username: username}),
+				success: (res)=>{
+					$('.popup').fadeOut(140)
+					this.props.deleteAdmin(username)
+				},
+				failure: (res)=>{console.log(res)}
+			})
+		}
+	}
     render(){
     	var editMode = (this.props.user.role === 'owner' || this.props.user.role === 'manager') ? true : false
     	let o = this.props.organization;
-    	console.log(this.props.admins)
 
     	return(
     		<div className="masonry">
-    			<div className="popup" id="edit-user-popup">{this.state.editUser}</div>
+    			<div className="popup" id="edit-user-popup">
+    				<h4>{this.state.editName}</h4>
+    				<div className="card-divider" />
+					<input type="text" className="hm-input form-control" placeholder="Name" value={this.state.editName} onChange={(e)=>this.changeName(e)} />
+					<input type="text" className="hm-input form-control" placeholder="Email" value={this.state.editEmail} onChange={(e)=>this.changeEmail(e)} />
+					<input type="password" className="hm-input form-control" placeholder="Password" onChange={(e)=>this.changePassword(e)} />
+					{this.state.editRole === "owner" ? <select id="create-role"className="hm-input form-control"><option>owner</option></select> :
+					<select className="hm-input form-control" onChange={(e)=>this.changeRole(e)}>
+						<option style={{display: "none"}}>{this.state.editRole}</option>
+						<option>technician</option>
+						<option>manager</option>
+					</select>
+					}
+					<div className="card-footer">
+						<div className="card-link" style={{color: "red"}} onClick={()=>this.deleteUser()}>Delete</div>
+						<div className="card-link" onClick={()=>this.handleCancelUserClick()}>Cancel</div>
+						<div className="card-link" onClick={()=>this.submitEditUser()}>Submit</div>
+					</div>
+    			</div>
+
     			<div className="popup" id="add-user-popup">
 					<h4>Add User</h4>
 					<div className="card-divider" />
@@ -133,16 +201,32 @@ class Organization extends Component {
 					{this.props.admins && 
 						<div style={{position: "absolute", top: "10px", right: "10px", fontWeight: "bold"}}>Total Users: {this.props.admins.length}</div>
 					}
-					{this.props.admins &&
+					{(this.props.admins && editMode) ?
 						this.props.admins.map((admin, i)=>{
 							var initials = admin.name[0] + admin.name[admin.name.indexOf(' ') + 1]
-							return (<div className="org-user-box" key={i} onClick={(e)=>this.handleEditUserClick(e)}>
-								<div className="avatar-circle">{initials}</div>
-								<div className="org-user-box-text">
-									<b>{admin.name}</b><br />
-									{admin.role}
+							return(
+								<div id={i} className="org-user-box org-user-box-edit-hover" key={i} onClick={(e)=>this.handleEditUserClick(e)}>
+									<div id={i} className="avatar-circle">{initials}</div>
+									<div id={i} className="org-user-box-text">
+										<b id={i}>{admin.name}</b><br />
+										{admin.role}
+									</div>
 								</div>
-							</div>)
+							)
+						})
+
+						:
+						this.props.admins.map((admin, i)=>{
+							var initials = admin.name[0] + admin.name[admin.name.indexOf(' ') + 1]
+							return(
+								<div id={i} className="org-user-box" key={i}>
+									<div id={i} className="avatar-circle">{initials}</div>
+									<div id={i} className="org-user-box-text">
+										<b id={i}>{admin.name}</b><br />
+										{admin.role}
+									</div>
+								</div>
+							)
 						})
 					}
 

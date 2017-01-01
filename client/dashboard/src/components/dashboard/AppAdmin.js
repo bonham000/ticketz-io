@@ -67,6 +67,12 @@ class AppAdmin extends Component {
       if (res){window.location.href = '/'}
     })
   }
+  submitEditUser(data){
+  	console.log(data)
+  	let newAdmins = this.state.admins
+  	newAdmins[data.index] = data
+  	this.setState({admins: newAdmins})
+  }
 	componentDidMount(){
 		window.addEventListener('resize', this.handleResize);
 		$('body').css('background', 'none');
@@ -160,7 +166,8 @@ class AppAdmin extends Component {
 									handleDeleteSite: (e)=>this.handleDeleteSite(e),
 									updateAdmins: (data)=>this.updateAdmins(data),
 									createAdmin: (data)=>this.createAdmin(data),
-									deleteAdmin: (data)=>this.deleteAdmin(data)
+									deleteAdmin: (data)=>this.deleteAdmin(data),
+									submitEditUser: (data)=>this.submitEditUser(data)
 								}
 						)}
 	    		</div>
