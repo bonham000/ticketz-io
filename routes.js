@@ -93,7 +93,7 @@ router.post('/api/new-ticket/:organization', function(req, response){
 			_idcount++;
 
 			var newticket = new Ticket(ticket);
-			console.log('New Ticker: ', newticket);
+			console.log('New Ticket: ', newticket);
 			newticket.save(function(err){
 				if (err) throw err;
 				console.log(req.body.name + ' has just submitted a ticket!');
