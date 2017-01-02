@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { browserHistory } from 'react-router';
 import $ from 'jquery';
 import axios from 'axios'
 
@@ -30,9 +31,7 @@ class Signup extends Component {
 	}
 	handleSubmit(e){
 		e.preventDefault();
-		function markInvalid(el){
-			document.getElementById(el).style.border = "1px solid red";
-		}
+		let markInvalid = (el) => document.getElementById(el).style.border = "1px solid red";
 
 		//puts all the form data into an object
 		let data = {}
@@ -43,56 +42,56 @@ class Signup extends Component {
 			document.getElementById(fields[i]).style.border = '1px solid #273135'
 		}
 
-
 		//form validation
-		if (this.state.domain){
-			this.setState({valid: true})
-		} else {
+		if (!this.state.domain) {
 			markInvalid('ownerEmail')
+			return;
 		}
+
 		//ownerName
 		if (!data.ownerName) {
 			markInvalid('ownerName')
-			this.setState({valid: false})
+			return;
 		}
 
 		//ownerEmail
 		if (!data.ownerEmail.match(this.state.emailRegex)) {
 			markInvalid('ownerEmail')
-			this.setState({valid: false})
+			return;
 		}
 		//ownerPassword
 		if (data.ownerPassword.length < 8) {
-			this.setState({valid: false})
 			markInvalid('ownerPassword')
 			markInvalid('confirmPassword')
+			return;
 		}
 		//confirmPassword
 		if (data.confirmPassword !== data.ownerPassword){
-			this.setState({valid: false})
 			markInvalid('ownerPassword')
 			markInvalid('confirmPassword')
+			return;
 		}
 		//orgName
 		if (!data.orgName) {
-			this.setState({valid: false})
 			markInvalid('orgName')
+			return;
 		}
 		//orgPassword
 		if (!data.orgPassword) {
-			this.setState({valid: false})
 			markInvalid('orgPassword')
+			return;
 		}
 
-		if (this.state.valid){
-			axios.post('/api/createorg', data).then((response) => {
-				document.getElementById('signup-form').reset()
-				$('.error-flash').html('Success! You can now log in.').css('color', 'green')
-			}).catch((err) => {
-				$('.error-flash').html('Server Unavailable.').css('color', 'red')
-			});
-			$('#org-email-flash').html('Must be a unique domain').css('color', 'black');
-		}
+		axios.post('/api/createorg', data).then((response) => {
+			document.getElementById('signup-form').reset()
+			$('.error-flash').html('Registering successful! You are being redirected...').css('color', 'green')
+			axios.post('/api/login', { username: data.ownerEmail, password: data.ownerPassword }).then(res => {
+				browserHistory.push('/dashboard');
+			}).catch(err => console.log(err));
+		}).catch((err) => {
+			$('.error-flash').html('Server Unavailable.').css('color', 'red')
+		});
+
 	}
 	render(){
 		return (
