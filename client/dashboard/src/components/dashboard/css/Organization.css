@@ -31,3 +31,7 @@
 	font-size: 11px;
 	font-family: tahoma;
 }
+#task-textarea {
+	text-align: left;
+	resize: none;
+}

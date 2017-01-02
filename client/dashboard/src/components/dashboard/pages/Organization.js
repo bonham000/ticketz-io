@@ -10,7 +10,8 @@ class Organization extends Component {
 			editName: '',
 			editEmail: '',
 			editPassword: '',
-			editRole: ''
+			editRole: '',
+			editTask: ''
 		}
 	}
 	handleAddUserClick(){
@@ -22,12 +23,14 @@ class Organization extends Component {
 	handleEditUserClick(e){
 		$('#edit-user-popup').fadeIn(140)
 		let a = this.props.admins[e.target.id];
+		var task = a.task || ''
 		this.setState({
 			editIndex: e.target.id,
 			editName: a.name,
 			editEmail: a.username,
 			editPassword: '',
-			editRole: a.role
+			editRole: a.role,
+			editTask: task
 		})
 	}
 	submitNewUser(){
@@ -73,12 +76,14 @@ class Organization extends Component {
 	changeEmail(e){this.setState({editEmail: e.target.value})}
 	changePassword(e){this.setState({editPassword: e.target.value})}
 	changeRole(e){this.setState({editRole: e.target.value})}
+	changeTask(e){this.setState({editTask: e.target.value})}
 	submitEditUser(){
 		let data = {
 			index: this.state.editIndex,
 			name: this.state.editName,
 			username: this.state.editEmail,
-			role: this.state.editRole
+			role: this.state.editRole,
+			task: this.state.editTask
 		}
 		if (this.state.editPassword) {data.password = this.state.editPassword}
 		$.ajax({
@@ -123,13 +128,15 @@ class Organization extends Component {
 					<input type="text" className="hm-input form-control" placeholder="Name" value={this.state.editName} onChange={(e)=>this.changeName(e)} />
 					<input type="text" className="hm-input form-control" placeholder="Email" value={this.state.editEmail} onChange={(e)=>this.changeEmail(e)} />
 					<input type="password" className="hm-input form-control" placeholder="Password" onChange={(e)=>this.changePassword(e)} />
-					{this.state.editRole === "owner" ? <select id="create-role"className="hm-input form-control"><option>owner</option></select> :
+					{this.state.editRole === "owner" ? <select className="hm-input form-control"><option>owner</option></select> :
 					<select className="hm-input form-control" onChange={(e)=>this.changeRole(e)}>
 						<option style={{display: "none"}}>{this.state.editRole}</option>
 						<option>technician</option>
 						<option>manager</option>
 					</select>
 					}
+					<textarea className="hm-input form-control" id="task-textarea" placeholder="Assign a task here, it will be visible on the user's dashboard." value={this.state.editTask} onChange={(e)=>this.changeTask(e)} />
+
 					<div className="card-footer">
 						<div className="card-link" style={{color: "red"}} onClick={()=>this.deleteUser()}>Delete</div>
 						<div className="card-link" onClick={()=>this.handleCancelUserClick()}>Cancel</div>

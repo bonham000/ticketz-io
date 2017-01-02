@@ -66,20 +66,6 @@ class Tickets extends Component {
 			
 		})
 	}
-	
-	setDetail = (id) => {
-		let details = this.state.details.concat(id);
-		let unique = details.reduce((uniq, item) => {
-			return (uniq.indexOf(item) == -1) ? uniq.concat(item) : uniq;
-		}, []);
-		this.setState({ details: unique });
-	}
-
-	closeDetails = (id) => {
-		let details = this.state.details.filter(item => item !== id);
-		this.setState({ details });
-	}
-	
 	render() {
 		let { details } = this.state;
 		return (
@@ -94,13 +80,8 @@ class Tickets extends Component {
 				{this.state.searchBox}
 				{this.state.loading}
 				{this.state.tickets.map((ticket)=>{
-					let showDetails = null;
-					if (details.indexOf(ticket._id) !== -1) showDetails = true;
 					return (
 						<TicketTemplate
-							showDetails={showDetails}
-							setDetail={this.setDetail}
-							closeDetails={this.closeDetails}
 							ticket={ticket}
 							admins={this.props.admins}
 							key={ticket._id} />

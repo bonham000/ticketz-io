@@ -24,34 +24,35 @@ class Dashboard extends Component {
 			});
 		};
 	}
-	setDetail = (id) => {
-		let details = this.state.details.concat(id);
-		let unique = details.reduce((uniq, item) => {
-			return (uniq.indexOf(item) == -1) ? uniq.concat(item) : uniq;
-		}, []);
-		this.setState({ details: unique });
-	}
-	closeDetails = (id) => {
-		let details = this.state.details.filter(item => item !== id);
-		this.setState({ details });
-	}
 	render() {
-		let { details } = this.state;
 		return (
 			<div>
-				<div className="card" id="dash-task">
-					<b>Task:</b> {this.props.user.task}
+				<div className="masonry">
+
+					<div className="flex-card-half">
+					This could be just some general info about the user...
+					</div>
+
+					<div className="flex-card-half">
+						<b>Task:</b> {this.props.user.task}
+					</div>
+
+					<div className="flex-card-half">
+					This is a chart... or at least it will be!
+					</div>
+
+					<div className="flex-card-half">
+					This could probably be another chart
+					</div>
+
 				</div>
+
+
 				<div className="card">
 					{this.state.loading}
 					{this.state.tickets.map((ticket)=>{
-						let showDetails = null;
-						if (details.indexOf(ticket._id) !== -1) showDetails = true;
 						return (
 							<TicketTemplate
-								showDetails={showDetails}
-								setDetail={this.setDetail}
-								closeDetails={this.closeDetails}
 								ticket={ticket}
 								admins={this.props.admins}
 								key={ticket._id} />
