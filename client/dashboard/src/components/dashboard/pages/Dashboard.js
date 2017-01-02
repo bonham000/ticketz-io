@@ -14,7 +14,7 @@ class Dashboard extends Component {
 	}
 	componentDidMount() {
 		if (this.props.user) {
-			let data = { status: "New", assigned: true };
+			let data = { status: "New", assignedto: this.props.user.name };
 			$.post('/api/querytickets', data, (tickets) => {
 				if (tickets.length) {
 					this.setState({tickets: tickets, loading: <div />})

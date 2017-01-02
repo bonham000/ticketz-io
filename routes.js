@@ -168,13 +168,9 @@ router.get('/api/initialData', function(req, res){
 //Handles all the advanced search functionality.
 //Just make a POST request, with a JSON object of your search params!
 router.post('/api/querytickets', function(req, res){
-	let { organization } = req.user;
-	Ticket.find(organization, function(err, tickets) {
-		let assignee = req.user.username;
-		tickets = tickets.filter(ticket => ticket.status == req.body.status);
-		if (req.body.assigned) {
-			tickets = tickets.filter(ticket => ticket.assignedto === assignee);
-		};
+	let data = req.body
+	data.organization = req.user.organization.toLowerCase()
+	Ticket.find(data, function(err, tickets) {
 		if (err) throw err;
 		res.send(tickets);
 	})
@@ -192,24 +188,19 @@ router.post('/api/organization-sites', function(req, res) {
 router.get('/api/updateassignee/:id/:assignee', function(req, res){
 	Ticket.update({_id: req.params.id}, {assignedto: req.params.assignee}, function(err, ticket){
 		if (err) throw err;
+		res.sendStatus(200);
 	})
 })
 //UPDATE: updates note on the ticket
 router.post('/api/updatenote/', function(req, res){
 	Ticket.update({_id: req.body.id}, {note: req.body.note}, function(err, ticket){
 		if (err) throw err;
-		res.send(200);
+		res.sendStatus(200);
 	});
-})
-//UPDATE: route a ticket to opposite dpt
-router.get('/api/routeticket/:id/:newdpt', function(req, res){
-	Ticket.update({_id: req.params.id}, {dpt: req.params.newdpt}, function(err, ticket){
-		if (err) throw err;
-	})
 })
 //UPDATE: mark a ticket as complete
 router.get('/api/completeticket/:id', function(req, res){
-	Ticket.update({_id: req.params.id}, {status: "Complete", assignedto: req.user.username}, function(err, ticket){
+	Ticket.update({_id: req.params.id}, {status: "Complete", assignedto: req.user.name}, function(err, ticket){
 		if (err) throw err;
 	})
 })

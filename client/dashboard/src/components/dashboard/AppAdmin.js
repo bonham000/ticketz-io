@@ -136,22 +136,17 @@ class AppAdmin extends Component {
       	<div id="admin-portal">
 				
 					<div id="profile-box">
-						<div id="menu-btn-box" className="prof-box-btn" onClick={this.animateNavbar}><i className="fa fa-bars" /></div>
+						<div id="menu-btn-box" className="hm-btn dash-top-btn" onClick={this.animateNavbar}><i className="fa fa-bars" /></div>
 						<div id="avatar-circle-box"><Link to="/dashboard/settings"><div className="avatar-circle">{this.state.initials}</div></Link></div>
 						<div id="profile-box-name"><Link to="/dashboard/settings">{this.state.user.name}</Link></div>
-						<div className="prof-box-btn">
-							<Link to="/">
-								<i className="fa fa-external-link-square" />
-								<i className="hide-mobile"> Home</i>
-							</Link>
-						</div>
-						<div className="prof-box-btn" onClick={()=>this.handleLogout()}><i className="fa fa-lock" /><i className="hide-mobile"> Logout</i></div>
+						<div className="hm-btn dash-top-btn" onClick={()=>this.handleLogout()}><i className="fa fa-lock" /><i className="hide-mobile"> Logout</i></div>
 					</div>
 			
 	    		<div id="admin-navbar">
 						<Link to="/dashboard"><div className="navbtn" id="Dashboard">Dashboard</div></Link>
 						<Link to="/dashboard/tickets"><div className="navbtn" id="Tickets">Tickets</div></Link>
 						<Link to="/dashboard/organization"><div className="navbtn" id="Organization">Organization</div></Link>
+						<Link to="/"><div id="dash-logo-btn"><img id="dash-logo" src="/images/logo.svg" /></div></Link>
 	    		</div>
 
 	    		<div id="admin-content">

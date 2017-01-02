@@ -37,35 +37,14 @@ Mobile First!
 #profile-box {
     position: fixed;
     background-color: #171d20;
-    height: 60px; width: 100%;
-    display: flex;
-    line-height: 60px;
+    height: 80px; width: 100%;
+    line-height: 80px;
     z-index: 10;
 }
 #avatar-circle-box {
-    margin: 0 -10px 0 10px;
-}
-#profile-box-name {
-    color: white;
-    width: 60%;
-    font-size: 20px;
-    text-align: left;
-    padding-left: 20px;
-}
-.prof-box-btn {
-    width: 12%;
-    margin: 0 20px;
-    background-color: #171d20;
-    color: #7cd5ba;
-    font-size: 16px;
-    text-align: center;
-    cursor: pointer;
-}
-.settings-btn {
-    color: #7cd5ba;
-}
-.prof-box-btn:hover, .settings-btn:hover {
-    color: #b6e5db;
+    margin: 17px 0 0 20px;
+    display: inline-block;
+    float: left;
 }
 .avatar-circle {
     width: 45px; height: 45px; line-height: 45px;
@@ -74,10 +53,25 @@ Mobile First!
     color: white;
     text-align: center;
     font-size: 16px;
+    float: left;
+    margin-right: 5px;
     font-weight: bold;
     cursor: pointer;
-    margin: 0 5px;
-    display: inline-block;
+}
+#profile-box-name {
+    color: white;
+    font-size: 20px;
+    text-align: left;
+    float: left;
+}
+#menu-btn-box {
+    float: left;
+}
+.dash-top-btn {
+    height: 80px;
+    text-align: center;
+    padding: 0 30px;
+    float: right;
 }
 
 
@@ -123,7 +117,7 @@ Mobile First!
 /*Nav Items*/
 #admin-navbar {
     position: fixed;
-    top: 60px;
+    top: 80px;
     background-color: #273135;
     color: #fa7252;
     width: 200px; height: 100%;
@@ -143,12 +137,21 @@ Mobile First!
     border-left: 5px solid #6dcab7;
     padding-left: 15px;
 }
+#dash-logo {
+    width: 50px;
+    margin: 0 auto;
+    display: block;
+}
+#dash-logo-btn {
+    padding: 20px;
+    font-size: 18px;
+}
 
 
 
 #admin-content {
     position: absolute;
-    top: 60px;
+    top: 80px;
     width: 100%;
     padding: 10px;
     background-color: #e9f0f5;
@@ -202,14 +205,14 @@ Mobile First!
     .hide-mobile {
         display: none;
     }
-    .prof-box-btn {
+    .dash-top-btn {
         font-size: 22px;
     }
     #profile-box-name {
         display: none;
     }
-    #profile-box {
-        justify-content: space-between;
+    #avatar-circle-box {
+        display: none;
     }
 }
 /*tablet sized screens*/
@@ -224,7 +227,6 @@ Mobile First!
         display: none;
     }
     #profile-box-name {
-        width: 80%;
         font-size: 14px;
     }
 

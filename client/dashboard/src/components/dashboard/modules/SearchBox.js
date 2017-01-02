@@ -80,7 +80,7 @@ class SearchBox extends Component {
 						<option value="">Assigned To</option>
 						{this.props.admins && 
 							this.props.admins.map((admin)=>{
-							return <option>{admin.username}</option>
+							return <option>{admin.name}</option>
 						})}
 					</select>
 				</div>
@@ -88,7 +88,7 @@ class SearchBox extends Component {
 			</div>
 			
 			<div className="form-group">
-				<button className="btn btn-success form-submit" id="search-submit" onClick={()=>this.handleSubmit()}>Search</button>
+				<button className="hm-btn" id="search-submit" onClick={()=>this.handleSubmit()}>Search</button>
 			</div>
 			
 		</div>
