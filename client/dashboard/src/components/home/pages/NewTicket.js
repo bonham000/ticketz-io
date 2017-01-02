@@ -115,6 +115,10 @@ export default class NewTicket extends React.Component {
 			delete data.success;
 		  delete data.complete;
 			delete data.errors;
+			delete data.sites;
+			let site = data.select;
+			data.site = site;
+			delete data.select;
 			axios.post(`/api/new-ticket/${this.props.params.organization}`, data).then(response => {
 				this.setState({ success: true });
 				$("html, body").animate({ scrollTop: 0 }, "slow");	
