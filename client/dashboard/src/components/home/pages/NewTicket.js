@@ -132,132 +132,126 @@ export default class NewTicket extends React.Component {
 		let { complete, errors } = this.state;
 		return (
 			<div>
-				{this.state.success ? <div className='ticket-success'>
-					<h2 id='ticket_h2'>Your ticket was submitted successfully!</h2>
-					<h4 id='ticket_h4'>We'll get to work quickly trying to respond to your issue.</h4>
-					<button className='btn btn-primary' id='ticket_reset' onClick={this.reset}>Submit Another Ticket</button>
+				{this.state.success ? <div className='small-card'>
+					<h3>Your ticket was submitted!</h3>
+					<div className="card-divider" />
+					<button className='hm-btn' id='ticket_reset' onClick={this.reset}>Submit Another Ticket</button>
 				</div> :
-					<div className="new-ticket">
-						<h1 className="newTicketTitle">Submit a New Ticket</h1>
+					<div className="small-card">
+						<h3 className="newTicketTitle">New Ticket</h3>
+						<div className="card-divider" />
 						<form onSubmit={this.submitTicket} className="form-group">
 
 							<div className={classnames("form-group", { 'has-error': errors.name, 'has-success': complete.name })}>
-								<label className="ticketLabel" htmlFor="name">Your Name:</label>
 								<input
 									name="name"
 									onBlur={this.checkInput}
 									value={this.state.name}
 									onChange={this.handleChange}
-									className="form-control hm-input ticket-input"
+									className="form-control hm-input"
 									placeholder="Your Name"/>
 							</div>
 
 							{ errors.name && 
-								<div className="alert alert-danger error-message">
+								<div className="error-message">
 		  						<strong>This field is required.</strong>
 								</div> }
 							
 							<div className={classnames("form-group", { 'has-error': errors.email, 'has-success': complete.email })}>
-								<label className="ticketLabel" htmlFor="email">Your Email:</label>
 								<input
 									name="email"
 									onBlur={this.validateEmail}
 									value={this.state.email}
 									onChange={this.handleChange}
-									className="form-control hm-input ticket-input"
+									className="form-control hm-input"
 									placeholder="Your Email"/>
 							</div>
 
 							{ errors.email && 
-								<div className="alert alert-danger error-message">
+								<div className="error-message">
 		  						<strong>Your email is invalid.</strong>
 								</div> }
 
 							<div className={classnames("form-group", { 'has-success': complete.phone })}>
-								<label className="ticketLabel" htmlFor="phone">Your Phone:</label>
 								<input
 									name="phone"
 									onBlur={this.checkInput}
 									value={this.state.phone}
 									onChange={this.handleChange}
-									className="form-control hm-input ticket-input"
+									className="form-control hm-input"
 									placeholder="Your Phone"/>
 							</div>
 
 							{ errors.phone && 
-								<div className="alert alert-danger error-message">
+								<div className="error-message">
 		  						<strong>Your phone is required.</strong>
 								</div> }
 							
 							<div className={classnames("form-group", { 'has-success': complete.site })}>
-								<label className="ticketLabel" htmlFor="site">Your Work Site:</label>
-								<select value={this.state.select} onChange={this.handleSelect} name="siteSelecter" className="form-control site-selector">
+								<select value={this.state.select} onChange={this.handleSelect} name="siteSelecter" className="form-control hm-input site-selector">
 									<option value="default">Select Your Work Site</option>
 									{this.state.sites.map((site, i) => <option value={site} key={i}>{site}</option> )}
 								</select>
 							</div>
 
 							{ errors.site && 
-								<div className="alert alert-danger error-message">
+								<div className="error-message">
 		  						<strong>You must select a site.</strong>
 								</div> }
 							
 							<div className={classnames("form-group", { 'has-success': complete.room })}>
-								<label className="ticketLabel" htmlFor="room">Room:</label>
 								<input
 									name="room"
 									onBlur={this.checkInput}
 									value={this.state.room}
 									onChange={this.handleChange}
-									className="form-control hm-input ticket-input"
+									className="form-control hm-input"
 									placeholder="Room"/>
 							</div>
 
 							{ errors.room && 
-								<div className="alert alert-danger error-message">
+								<div className="error-message">
 		  						<strong>Your room is required.</strong>
 								</div> }
 							
 							<div className={classnames("form-group", { 'has-error': errors.description, 'has-success': complete.description })}>
-								<label className="ticketLabel" htmlFor="description">Please Describe Your Problem:</label>
 								<textarea
 									name="description"
 									onBlur={this.checkInput}
 									value={this.state.description}
 									onChange={this.handleChange}
-									className="form-control problem-description"
+									className="form-control hm-input"
 									id="description"
-									placeholder="Problem Description">
+									placeholder="Please describe your problem.">
 								</textarea>
 							</div>
 
 							{ errors.description && 
-								<div className="alert alert-danger error-message">
+								<div className="error-message">
 		  						<strong>This field is required.</strong>
 								</div> }						
 
 							<div className={classnames("form-group", { 'has-error': errors.password, 'has-success': complete.password })}>
-								<label className="ticketLabel" htmlFor="room">Enter Your Organization's Password:</label>
 								<input
 									name="password"
 									onBlur={this.checkInput}
 									value={this.state.password}
 									onChange={this.handleChange}
-									className="form-control hm-input ticket-input"
+									className="form-control hm-input"
 									placeholder="Organization Password"/>
 							</div>
 
 							{ errors.password && 
-								<div className="alert alert-danger error-message">
+								<div className="error-message">
 		  						<strong>You must enter your organization's password.</strong>
 								</div>}
 
 							{ errors.authorized && 
-								<div className="alert alert-danger error-message">
+								<div className="error-message">
 		  						<strong>Your password was incorrect.</strong>
 								</div>}
 
-							<button type="submit" className="btn-primary hm-btn btn-lg" id="btn-submit">Submit Ticket</button>
+							<button type="submit" className="hm-btn submit-ticket-btn-pad" id="btn-submit">Submit Ticket</button>
 						</form>
 				</div>}
 				

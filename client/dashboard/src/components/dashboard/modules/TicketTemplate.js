@@ -34,7 +34,7 @@ class TicketTemplate extends Component {
 				
 				<div className="sub-container c1">
 					<b>Ticket #{this.props.ticket._id} - {this.props.ticket.status}</b><br />
-					<i>{this.props.ticket.date}<br />(+00:00 GMT)</i><br />
+					<i>{this.props.ticket.date}</i><br />
 					<div className="card-divider" />
 					<i className="fa fa-user" /><b> {this.props.ticket.name}</b><br />
 					<i className="fa fa-envelope" /> {this.props.ticket.email} <br />

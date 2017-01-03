@@ -13,6 +13,7 @@ var ticketSchema = new Schema({
     assignedto: String,
     note: String,
     date: String,
+    dateRaw: Date,
     organization: String
 });
 

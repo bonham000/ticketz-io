@@ -24,9 +24,10 @@ class Settings extends Component {
 		return (
 			<div className="small-card">
 				<h3>Settings</h3>
-				<h4>Reset Password</h4>
-				<input type="password" id="new-password" className="form-control" placeholder="New Password" />
-				<input type="password" id="confirm-password" className="form-control" placeholder="Confirm Password" />
+				<div className="card-divider" />
+				<h5 style={{textAlign: "center"}}>Reset Password</h5>
+				<input type="password" id="new-password" className="form-control hm-input" placeholder="New Password" />
+				<input type="password" id="confirm-password" className="form-control hm-input" placeholder="Confirm Password" />
 				<button type="submit" id="reset-password-btn" className="hm-btn" onClick={this.handleClick}>Reset</button>
 				<div className="error-flash" />
 			</div>

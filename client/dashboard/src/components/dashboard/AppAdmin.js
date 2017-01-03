@@ -154,8 +154,8 @@ class AppAdmin extends Component {
 	    		<div id="admin-content">
 						{this.props.children &&
 							React.cloneElement(
-								this.props.children,
-								{admins: this.state.admins,
+								this.props.children, {	
+									admins: this.state.admins,
 									user: this.state.user,
 									organization: this.state.organization,
 									initials: this.state.initials,

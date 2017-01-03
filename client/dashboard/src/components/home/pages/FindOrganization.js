@@ -2,8 +2,6 @@ import React from 'react';
 import { browserHistory } from 'react-router';
 import axios from 'axios';
 
-import '../css/Find-Organization.css';
-
 export default class NewTicketSearch extends React.Component {
 	constructor(props) {
 		super(props);
@@ -37,8 +35,9 @@ export default class NewTicketSearch extends React.Component {
 	}
 	render() {
 		return (
-			<div className="find-organization">
-				<h3>Type in Your Organization Name Here:</h3>
+			<div className="small-card">
+				<h3>Organization Search</h3>
+				<div className="card-divider" />
 				<form onSubmit={this.submitRequest} className="form-group find-organization-form">
 					<input
 						type="text"
@@ -47,11 +46,11 @@ export default class NewTicketSearch extends React.Component {
 						value={this.state.input}
 						onChange={this.handleChange} />
 					{ this.state.error && 
-						<div className="alert alert-danger">
+						<div className="error-message" style={{margin: "0 auto 10px auto"}}>
   						<strong>This organization is not entered in the system.</strong> <br />
   						Did you type the name correctly?
 						</div> }
-					<button type="submit" className="btn-primary hm-btn find-org-btn">Submit</button>
+					<button type="submit" className="hm-btn find-org-btn">Submit</button>
 				</form>
 			</div>
 		);

@@ -165,29 +165,32 @@ Mobile First!
     padding: 10px;
     background-color: white;
     width: 100%;
-    border-radius: 5px;
+    border-radius: 3px;
     text-align: center;
     margin: 0 10px 10px 0;
     overflow: hidden;
+    border: 1px solid rgb(150,150,150);
 }
 .small-card {
     padding: 10px;
     background-color: white;
     width: 300px;
-    border-radius: 5px;
-    text-align: center;
+    display: block;
+    border-radius: 3px;
     margin: 0 auto;
     overflow: hidden;
+    border: 1px solid rgb(150,150,150);
 }
 .flex-card-half { /*full width on mobile, half on larger screens*/
     padding: 20px 5%;
     background-color: white;
     width: 100%;
-    border-radius: 5px;
+    border-radius: 3px;
     margin: 0 10px 10px 0;
     overflow: hidden;
     vertical-align: top;
     position: relative;
+    border: 1px solid rgb(150,150,150);
 }
 .card-divider {
     height: 1px; width: 100%;
@@ -229,11 +232,6 @@ Mobile First!
     #profile-box-name {
         font-size: 14px;
     }
-
-    .flex-card-half {
-        width: 75%;
-        margin: 10px auto;
-    }
     .popup {
         margin-left: -40px;
     }
@@ -246,6 +244,8 @@ Mobile First!
     }
     .flex-card-half {
         width: 100%;
-        display: inline-block;
+-webkit-column-break-inside: avoid;
+          page-break-inside: avoid;
+               break-inside: avoid;
     }
 }

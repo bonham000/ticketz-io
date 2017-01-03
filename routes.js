@@ -91,6 +91,7 @@ router.post('/api/new-ticket/:organization', function(req, response){
 			ticket.assignedto = '';
 			ticket.note = '';
 			ticket.date = moment().format('MMMM DD YYYY, h:mm a');
+			ticket.dateRaw = new Date();
 			ticket._id = _idcount;
 			ticket.organization = url;
 			_idcount++;
@@ -167,10 +168,18 @@ router.get('/api/initialData', function(req, res){
     }
 });
 //READ:
+router.get('/api/querytodaystickets', function(req, res){
+	var start = new Date(); start.setHours(0,0,0,0);
+	var end = new Date(); end.setHours(23,59,59,999);
+	Ticket.find({ dateRaw: { $gt: start, $lt: end } }, function(err, tickets) {
+		if (err) throw err;
+		res.send(tickets);
+	})
+})
+//READ:
 //Handles all the advanced search functionality.
 //Just make a POST request, with a JSON object of your search params!
 router.post('/api/querytickets', function(req, res){
-	req.body.organization = req.user.organization.toLowerCase().replace(/\W/g, '-')
 	Ticket.find(req.body, function(err, tickets) {
 		if (err) throw err;
 		res.send(tickets);
