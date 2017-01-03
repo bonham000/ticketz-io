@@ -270,9 +270,9 @@ router.delete('/api/deleteadmin', function(req, res){
 
 //Serve the webpack bundle --
 //The fancy react/react-router dashboard!
-router.use(express.static(path.join(__dirname, '/client/dashboard/build')));
+router.use(express.static(path.join(__dirname, '/client/build')));
 router.get('*', function(req, res){
-    res.sendFile(path.join(__dirname, '/client/dashboard/build/index.html'));
+    res.sendFile(path.join(__dirname, '/client/build/index.html'));
 });
 
 module.exports = router;

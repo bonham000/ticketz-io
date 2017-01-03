@@ -36,7 +36,8 @@ class App extends Component {
                     <div>
                         <b>Ticketz.io</b><br/>
                         <a href="https://www.linkedin.com/in/ethanrose0/" target="_blank">Ethan Rose</a><br/>
-                        Sean Smith<br/><br/>
+                        <a href="http://sean-smith.me/" target="_blank">Sean Smith</a><br/>
+                        <br/><br/>
                         &copy;2016-2017
                     </div>
 
