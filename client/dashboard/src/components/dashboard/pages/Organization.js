@@ -57,7 +57,9 @@ class Organization extends Component {
 				username: document.getElementById('create-email').value,
 				password: document.getElementById('create-password').value,
 				role: document.getElementById('create-role').value,
-				organization: this.props.organization.orgName
+				organization: this.props.organization.url,
+				monthCount: 0,
+				allTimeCount: 0
 			}
 			$.ajax({
 				method: 'post',
@@ -215,7 +217,7 @@ class Organization extends Component {
 								<div id={i} className="org-user-box org-user-box-edit-hover" key={i} onClick={(e)=>this.handleEditUserClick(e)}>
 									<div id={i} className="avatar-circle">{initials}</div>
 									<div id={i} className="org-user-box-text">
-										<b id={i}>{admin.name}</b><br />
+										<b id={i}>{admin.name} [{admin.allTimeCount}]</b><br />
 										{admin.role}
 									</div>
 								</div>
@@ -223,13 +225,14 @@ class Organization extends Component {
 						})
 
 						:
+
 						this.props.admins.map((admin, i)=>{
 							var initials = admin.name[0] + admin.name[admin.name.indexOf(' ') + 1]
 							return(
 								<div id={i} className="org-user-box" key={i}>
 									<div id={i} className="avatar-circle">{initials}</div>
 									<div id={i} className="org-user-box-text">
-										<b id={i}>{admin.name}</b><br />
+										<b id={i}>{admin.name} [{admin.allTimeCount}]</b><br />
 										{admin.role}
 									</div>
 								</div>

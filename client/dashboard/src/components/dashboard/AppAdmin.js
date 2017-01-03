@@ -166,8 +166,7 @@ class AppAdmin extends Component {
 								}
 						)}
 	    		</div>
-
-      	</div>
+      	  </div>
       </div>
     )
   }

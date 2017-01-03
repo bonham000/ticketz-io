@@ -8,7 +8,9 @@ var userSchema = new Schema({
     password: {type: String, required: true},
     role: String, //technician OR manager OR owner
 	task: String, //managers and owners can assign tasks
-    organization: String
+    organization: String,
+    monthCount: Number,
+    allTimeCount: Number 
 });
 userSchema.pre('update', function(next){
     if (this.getUpdate().$set.password) {

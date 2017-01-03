@@ -36,6 +36,7 @@ router.post('/api/createorg', function(req, res){
 
 	var orgdata = req.body
 	orgdata.date = moment().format('MMMM DD YYYY, h:mm a');
+	orgdata.url = orgdata.orgName.toLowerCase().replace(/\W/g, '-');
 
 	var neworg = new Organization(orgdata)
 	console.log(neworg);
@@ -48,7 +49,9 @@ router.post('/api/createorg', function(req, res){
 			username: req.body.ownerEmail,
 			password: req.body.ownerPassword,
 			role: 'owner',
-			organization: orgdata.orgName
+			organization: orgdata.url,
+			monthCount: 0,
+			allTimeCount: 0
 		};
 
 		var newuser = new User(userdata)
@@ -93,7 +96,7 @@ router.post('/api/new-ticket/:organization', function(req, response){
 			_idcount++;
 
 			var newticket = new Ticket(ticket);
-			console.log('New Ticket: ', newticket);
+			console.log('New Ticker: ', newticket);
 			newticket.save(function(err){
 				if (err) throw err;
 				console.log(req.body.name + ' has just submitted a ticket!');
@@ -111,7 +114,6 @@ router.post('/api/createadmin', function(req, res){
 	console.log('body: ' + req.body)
 		User.findOne({username: req.body.username.toLowerCase()}, function (err, user) {
 			if (err) throw err;
-			console.log('user: ' + user)
 			if (user) res.status(500).send('Username already exists.');
 			else {
 				var newuser = new User(req.body);
@@ -168,9 +170,8 @@ router.get('/api/initialData', function(req, res){
 //Handles all the advanced search functionality.
 //Just make a POST request, with a JSON object of your search params!
 router.post('/api/querytickets', function(req, res){
-	let data = req.body
-	data.organization = req.user.organization.toLowerCase()
-	Ticket.find(data, function(err, tickets) {
+	req.body.organization = req.user.organization.toLowerCase().replace(/\W/g, '-')
+	Ticket.find(req.body, function(err, tickets) {
 		if (err) throw err;
 		res.send(tickets);
 	})
@@ -200,9 +201,13 @@ router.post('/api/updatenote/', function(req, res){
 })
 //UPDATE: mark a ticket as complete
 router.get('/api/completeticket/:id', function(req, res){
+	User.update({username: req.user.username.toLowerCase()}, {$inc: {monthCount:1, allTimeCount:1}}, function(err, user){
+		if (err) throw err;
+	})
 	Ticket.update({_id: req.params.id}, {status: "Complete", assignedto: req.user.name}, function(err, ticket){
 		if (err) throw err;
 	})
+	res.end()
 })
 //UPDATE: update user data
 router.put('/api/editadmin', function(req, res){

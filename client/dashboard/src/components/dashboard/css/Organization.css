@@ -21,6 +21,7 @@
 	padding: 5px;
 	transition: background-color .2s;
 	border-radius: 5px;
+	white-space: nowrap;
 }
 .org-user-box-edit-hover:hover {
 	background-color: #ddd;

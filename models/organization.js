@@ -12,10 +12,5 @@ var organizationSchema = new Schema({
 	sites: Array
 });
 
-organizationSchema.pre('save', function(next){
-	this.url = this.orgName.toLowerCase().replace(/\W/g, '-');
-  next();
-})
-
 var Organization = mongoose.model('Organization', organizationSchema);
 module.exports = Organization;
