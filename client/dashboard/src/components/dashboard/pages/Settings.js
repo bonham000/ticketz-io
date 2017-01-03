@@ -27,7 +27,7 @@ class Settings extends Component {
 				<h4>Reset Password</h4>
 				<input type="password" id="new-password" className="form-control" placeholder="New Password" />
 				<input type="password" id="confirm-password" className="form-control" placeholder="Confirm Password" />
-				<button type="submit" id="reset-password-btn" className="btn btn-success" onClick={this.handleClick}>Reset</button>
+				<button type="submit" id="reset-password-btn" className="hm-btn" onClick={this.handleClick}>Reset</button>
 				<div className="error-flash" />
 			</div>
 		)

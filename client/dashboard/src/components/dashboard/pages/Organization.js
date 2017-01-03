@@ -25,6 +25,7 @@ class Organization extends Component {
 		let a = this.props.admins[e.target.id];
 		var task = a.task || ''
 		this.setState({
+			oldEmail: a.username,
 			editIndex: e.target.id,
 			editName: a.name,
 			editEmail: a.username,
@@ -81,6 +82,7 @@ class Organization extends Component {
 	changeTask(e){this.setState({editTask: e.target.value})}
 	submitEditUser(){
 		let data = {
+			oldUsername: this.state.oldEmail,
 			index: this.state.editIndex,
 			name: this.state.editName,
 			username: this.state.editEmail,

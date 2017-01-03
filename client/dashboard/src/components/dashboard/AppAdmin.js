@@ -68,9 +68,11 @@ class AppAdmin extends Component {
     })
   }
   submitEditUser(data){
-  	console.log(data)
   	let newAdmins = this.state.admins
-  	newAdmins[data.index] = data
+  	let keys = Object.keys(data)
+  	for (var i in keys) {
+        newAdmins[data.index][keys[i]] = data[keys[i]]
+	}
   	this.setState({admins: newAdmins})
   }
 	componentDidMount(){

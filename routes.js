@@ -216,7 +216,7 @@ router.get('/api/completeticket/:id', function(req, res){
 })
 //UPDATE: update user data
 router.put('/api/editadmin', function(req, res){
-	User.update({username: req.body.username.toLowerCase()}, req.body, function(err, updated){
+	User.update({username: req.body.oldUsername}, req.body, function(err, updated){
 		if (err) throw err;
 		res.end();
 	})
