@@ -168,7 +168,7 @@ class Organization extends Component {
 					<div style={{textAlign: "left"}}>
 						<b>{o.orgName}</b>
 						<br />
-						<b>Joined: </b>{o.date}
+						<b>Joined: </b>{o.date}<br />(+00:00 GMT)
 						<br />
 						<b>URL: </b> <a href={'http://www.ticketz.io/new/' + o.url} target="_blank" style={{color: "#66B"}}>{'http://www.ticketz.io/new/' + o.url}</a>
 						<br />

@@ -201,12 +201,17 @@ router.post('/api/updatenote/', function(req, res){
 })
 //UPDATE: mark a ticket as complete
 router.get('/api/completeticket/:id', function(req, res){
-	User.update({username: req.user.username.toLowerCase()}, {$inc: {monthCount:1, allTimeCount:1}}, function(err, user){
+	User.findOne({username: req.user.username.toLowerCase()}, function(err, user){
 		if (err) throw err;
+		user.monthCount++
+		user.allTimeCount++
+		user.save()
 	})
+
 	Ticket.update({_id: req.params.id}, {status: "Complete", assignedto: req.user.name}, function(err, ticket){
 		if (err) throw err;
 	})
+
 	res.end()
 })
 //UPDATE: update user data

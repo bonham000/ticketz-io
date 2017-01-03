@@ -34,7 +34,7 @@ class TicketTemplate extends Component {
 				
 				<div className="sub-container c1">
 					<b>Ticket #{this.props.ticket._id} - {this.props.ticket.status}</b><br />
-					<i>{this.props.ticket.date}</i><br />
+					<i>{this.props.ticket.date}<br />(+00:00 GMT)</i><br />
 					<div className="card-divider" />
 					<i className="fa fa-user" /><b> {this.props.ticket.name}</b><br />
 					<i className="fa fa-envelope" /> {this.props.ticket.email} <br />
@@ -49,6 +49,7 @@ class TicketTemplate extends Component {
 				<div className="sub-container c3">
 					<div id="notes-wrapper">
 						<textarea className="ticket-notes" value={this.state.note} onChange={this.handleChange} onBlur={this.setNote} placeholder="Leave a note here! It will save automatically." />
+						
 						<select className="ticket-assign" onChange={(e)=>this.setAssignee(e)}>
 							<option style={{"display": "none"}}>{this.props.ticket.assignedto || "Assign Ticket"}</option>
 							{!this.props.admins ? '' : this.props.admins.map((admin, i)=>{
@@ -56,7 +57,11 @@ class TicketTemplate extends Component {
 							})
 							}
 						</select>
-						<div className="hm-btn complete-tk-btn" onClick={(e)=>this.complete(e)}>Complete</div>
+
+						{this.props.ticket.status !== "Complete" &&
+							<div className="hm-btn complete-tk-btn" onClick={(e)=>this.complete(e)}>Complete</div>
+						}
+
 					</div>
 				</div>
 			</div>
