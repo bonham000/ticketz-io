@@ -12,13 +12,6 @@ Built on MERN stack
 TO DO:
 Replace "Users" page with "Organization" page <-- I'm working on this one
 
-Finish "/new-ticket/:orgName"
-
-Fix/finish issues with signup form
-  -Allows password less than 8 characters
-  -Auto log-in on successful creation
-  -At some point we probably want to have email confirmation of any email addresses used
-
 Add extra modules to Dashboard
   -bar chart of tickets completed this week, by user
   
