@@ -154,7 +154,7 @@ router.get('/api/initialData', function(req, res){
         responses++
         sendSyncResult()
     })
-	Organization.findOne({orgName: req.user.organization}, function(err, org){
+	Organization.findOne({url: req.user.organization}, function(err, org){
 		if (err) throw err;
 		data.organization = org
 		responses++
